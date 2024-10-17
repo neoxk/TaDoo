@@ -6,7 +6,7 @@ import { TaskNavigation } from "./TaskNavigation";
 export function Sidebar() {
   return (
     <>
-      <div class="w-64 bg-slate-100 h-full flex flex-col p-4 justify-between">
+      <div class="w-64 bg-slate-100 h-full flex flex-col p-4 justify-between hidden md:block">
         <Logo />
 
         <div class="h-full my-10 flex flex-col">

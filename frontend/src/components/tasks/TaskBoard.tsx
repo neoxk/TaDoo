@@ -24,7 +24,7 @@ export const TaskBoard = ({ title, taskListt }: TaskBoardProps) => {
   ];
 
   return (
-    <div className="w-full p-10">
+    <div className="w-full p-3 md:p-10">
       <p class="font-bold text-2xl mb-4">{title}</p>
       <div className={`grid md:grid-cols-1 xl:grid-cols-2`}>
         {taskList.map((taskList) => (
