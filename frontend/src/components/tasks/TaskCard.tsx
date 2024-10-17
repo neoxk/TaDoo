@@ -2,6 +2,7 @@ import { Tag } from "../../models/Tag";
 import { Icon } from "../../types/types";
 import { Button } from "../common/Button";
 import { Checkbox } from "../common/Checkbox";
+import { EditableText } from "../common/EditableText";
 import { TagView } from "./TagView";
 
 export interface TaskCardProps {
@@ -15,7 +16,7 @@ export const TaskCard = ({ name, tags }: TaskCardProps) => {
       <div>
         <div class="inline-flex items-center gap-2">
           <Checkbox checked={false} />
-          {name}
+          <EditableText text={name} handleChange={() => {}} />
           {tags.map((tag) => (
             <TagView name={tag.name} color={tag.color} />
           ))}
