@@ -9,4 +9,9 @@ export enum Color {
   pink = "pink",
 }
 
+export enum Icon {
+  trash = "trash",
+  send = "send",
+}
+
 export const colorValues = Object.values(Color);

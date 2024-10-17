@@ -1,4 +1,4 @@
-import { Color } from "../types/color";
+import { Color } from "../types/types";
 
 export class Tag {
   constructor(public name: string, public color: Color) {
