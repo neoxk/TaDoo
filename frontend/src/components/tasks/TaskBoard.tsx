@@ -1,5 +1,5 @@
 import { Task } from "../../models/Task.ts";
-import { Color } from "../../types/color.ts";
+import { Color } from "../../types/types.ts";
 import { TasksContainer } from "./TasksContainer.tsx";
 
 interface TaskBoardProps {
@@ -22,12 +22,6 @@ export const TaskBoard = ({ title, taskListt }: TaskBoardProps) => {
     { title: "Tasks2", tasks: tasks1 },
     { title: "Tasks2", tasks: tasks1 },
   ];
-
-  const getColsClass = (): string => {
-    if (taskList.length === 1) return "grid-cols-1";
-    else if (taskList.length === 2) return "grid-cols-2";
-    else return "grid-cols-3";
-  };
 
   return (
     <div className="w-full p-10">
