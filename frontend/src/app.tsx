@@ -1,13 +1,11 @@
-import {Sidebar} from './components/Sidebar.tsx'
-import { Tasks } from './components/Tasks.tsx'
+import { Sidebar } from "./components/sidebar/Sidebar.tsx";
+import { TaskBoard } from "./components/tasks/TaskBoard.tsx";
 
 export function App() {
-
   return (
-  <div class="h-screen flex">
-     <Sidebar/>
-     <Tasks /> 
-  </div>
-
-  )
+    <div class="h-screen flex">
+      <Sidebar />
+      <TaskBoard title="Personal" />
+    </div>
+  );
 }
