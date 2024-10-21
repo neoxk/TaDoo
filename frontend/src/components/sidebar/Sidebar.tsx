@@ -9,12 +9,10 @@ export function Sidebar() {
       <div class="w-64 bg-slate-100 h-full flex flex-col p-4 justify-between hidden md:block">
         <Logo />
 
-        <div class="h-full my-10 flex flex-col">
-          <div>
-            <TaskNavigation />
-            <Navigation linkTo="kjk" text="Delegated" />
-            <Navigation linkTo="kjk" text="Calendar" />
-          </div>
+        <div class="my-10 flex flex-col">
+          <TaskNavigation />
+          <Navigation linkTo="kjk" text="Delegated" />
+          <Navigation linkTo="kjk" text="Calendar" />
         </div>
 
         <Profile

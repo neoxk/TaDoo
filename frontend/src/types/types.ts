@@ -12,6 +12,7 @@ export enum Color {
 export enum Icon {
   trash = "trash",
   send = "send",
+  add = "add"
 }
 
 export const colorValues = Object.values(Color);
