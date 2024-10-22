@@ -1,5 +1,6 @@
 import { Task } from "../../models/Task.ts";
 import { Color } from "../../types/types.ts";
+import { EditableText } from "../common/EditableText.tsx";
 import { TasksContainer } from "./TasksContainer.tsx";
 
 interface TaskBoardProps {
@@ -25,7 +26,11 @@ export const TaskBoard = ({ title, taskListt }: TaskBoardProps) => {
 
   return (
     <div className="w-full p-3 md:p-10">
-      <p class="font-bold text-2xl mb-4">{title}</p>
+      <EditableText 
+        text={title} 
+        handleChange={() => {}} 
+        props={{className: "font-bold text-2xl mb-4"}} />
+
       <div className={`grid md:grid-cols-1 xl:grid-cols-2`}>
         {taskList.map((taskList) => (
           <TasksContainer title={taskList.title} tasks={taskList.tasks} />

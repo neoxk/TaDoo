@@ -3,6 +3,7 @@ import type { Task } from "../../models/Task";
 import { EditableText } from "../common/EditableText";
 import { Button } from "../common/Button";
 import { Color, Icon } from "../../types/types";
+import { useState } from "preact/hooks";
 
 interface TasksContainerProps {
   title: string;
@@ -10,6 +11,8 @@ interface TasksContainerProps {
 }
 
 export function TasksContainer({ title, tasks }: TasksContainerProps) {
+  const [currTasks, setCurrTasks] = useState(tasks);
+
   return (
     <div className="w-full max-w-[600px] p-4">
       <div className="flex justify-between items-center">

@@ -8,11 +8,11 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Tag {
+public class Tasklist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long tasklist_id;
 
     private String name;
-    private String color;
+    private int board_id;
 }

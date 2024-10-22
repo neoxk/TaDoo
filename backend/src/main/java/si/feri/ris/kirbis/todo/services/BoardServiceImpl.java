@@ -5,26 +5,41 @@ import org.springframework.stereotype.Service;
 import si.feri.ris.kirbis.todo.entities.Board;
 import si.feri.ris.kirbis.todo.repositories.BoardRepository;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class BoardServiceImpl implements BoardService{
     @Autowired
-    private BoardRepository boardRepository;
+    private BoardRepository repository;
     @Override
     public void create(Board board) {
+        System.out.println("Creating board: " + board.getName());
+        repository.save(board);
     }
 
     @Override
-    public Board[] getAll() {
-        return new Board[0];
+    public List<Board> getAll() {
+        return repository.findAll();
     }
 
     @Override
-    public void update(int id, Board newBoard) {
-
+    public void update(long id, Board newBoard) {
+      Optional<Board> oldBoard = repository.findById(id);
+      oldBoard.ifPresent(board -> {
+          board.setName(newBoard.getName());
+          repository.save(board);
+      });
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(long id) {
+        Optional<Board> board = repository.findById(id);
+        board.ifPresent(foundBoard -> repository.delete(foundBoard));
+    }
 
+    @Override
+    public Optional<Board> getById(long id) {
+       return repository.findById(id);
     }
 }

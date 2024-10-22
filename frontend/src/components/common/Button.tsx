@@ -6,7 +6,7 @@ interface ButtonProps {
   onClick: () => void;
   color?: Color;
   iconName?: Icon;
-  size: "small" | "medium" | "large";
+  size: "xsmall" | "small" | "medium" | "large";
 }
 
 export const Button = ({
@@ -32,6 +32,9 @@ export const Button = ({
   }
   if (size === "large") {
     width = 40;
+  }
+  if (size === "xsmall") {
+    width = 15;
   }
 
   if (iconName && iconName === "trash") iconUrl = "/src/assets/icon_trash.svg";
