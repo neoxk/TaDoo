@@ -4,17 +4,16 @@ import { EditableText } from "../common/EditableText.tsx";
 import { TasksContainer } from "./TasksContainer.tsx";
 
 interface TaskBoardProps {
-  taskListt: { title: string; tasks: Task[] }[];
   title: string;
 }
 
-export const TaskBoard = ({ title, taskListt }: TaskBoardProps) => {
+export const TaskBoard = ({ title }: TaskBoardProps) => {
   const tasks1: Task[] = [
-    new Task("Ocisti sobo", false, [{ name: "nujno", color: Color.red }]),
-    new Task("Opravi domaco nalogo", false, [
+    new Task(1, "Ocisti sobo", false, [{ name: "nujno", color: Color.red }]),
+    new Task(2, "Opravi domaco nalogo", false, [
       { name: "easy", color: Color.green },
     ]),
-    new Task("Pojdi na sprehod", false, [
+    new Task(3, "Pojdi na sprehod", false, [
       { name: "jutri", color: Color.yellow },
     ]),
   ];

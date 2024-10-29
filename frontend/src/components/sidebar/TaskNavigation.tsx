@@ -1,36 +1,36 @@
-import { useEffect, useState } from "preact/hooks";
-import { BoardService } from "../../services/BoardService";
-import { Board } from "../../models/Board";
 import { Button } from "../common/Button";
-import { Color, Icon } from "../../types/types";
+import { Icon } from "../../types/types";
+import { useBoards,  } from "../../state/boards/useBoards";
+import {  BoardService } from "../../services/BoardService";
+import { boardActionType } from "../../state/boards/boardReducer";
+import { useEffect } from "preact/hooks";
 
 export const TaskNavigation = () => {
-  const [boards, setBoards] = useState<Board[]>([]);
-
-  const service = new BoardService("http://localhost:8080/board");
+  const [boards, dispatch] = useBoards();
+  
 
   useEffect(() => {
-    service.getBoards().then((data) => {
-      setBoards(data);
-    }); 
-  }, [])
+    const boardService = new BoardService();
 
-  const handleCreateBoard = () => {
-    setBoards(boards => [...boards, new Board("New")])
-  }
-
+    boardService.getBoards().then((boards) => {
+        dispatch({type: boardActionType.SET_BOARDS , payload: {boards: boards}})
+  })
+  
+}, [])
 
   return (
     <>
       <p class="font-bold">Boards</p>
       <div class="ml-4 w-full">
-        {boards.map((board) => (
+        {console.log(boards)}
+        
+        {boards.map((item) => (
         <div className="cursor-pointer p-1 hover:bg-slate-200 flex justify-between">
-          <p >{board.name}</p>
+          <p >{item.name}</p>
           <Button iconName={Icon.trash} size="xsmall" onClick={() => {}}/>
         </div>))}
 
-        <Button onClick={handleCreateBoard} iconName={Icon.add} size="small"/>
+        <Button onClick={() => {}} iconName={Icon.add} size="small"/>
       </div>
     </>
   );
