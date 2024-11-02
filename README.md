@@ -38,6 +38,9 @@
         <a href="#-running-the-app">Running the App</a>
       </li>
       <li>
+        <a href="#-project-structure">Project Structure</a>
+      </li>
+      <li>
         <a href="#-usage">Usage</a>
       </li>
       <li>
@@ -166,6 +169,49 @@ Ensure you have the following installed:
     ```bash
       npm run dev
     ```
+    
+<br/>
+
+<!-- PROJECT STRUCTURE SECTION -->
+## 📦 Project Structure
+
+Below is an overview of the project structure.
+
+```plaintext
+.
+├── backend                                         # Backend project root
+│   ├── src                                         # Source files for the backend
+│   │   ├── main                                    # Main application source code
+│   │   │   ├── java/si/feri/ris/kirbis/todo        # Java package structure
+│   │   │   │   ├── controllers                     # Controllers for handling HTTP requests
+│   │   │   │   ├── entities                        # Entity classes representing database tables
+│   │   │   │   ├── repositories                    # Interfaces for data persistence
+│   │   │   │   ├── services                        # Business logic and service classes
+│   │   │   │   └── TodoApplication.java            # Main class for Spring Boot application
+│   │   │   └── resources                           # Configuration files
+│   │   └── test/java/si/feri/ris/kirbis/todo       # Unit and integration tests
+│   ├── mvnw                                        # Maven wrapper script for Unix-based systems
+│   ├── mvnw.cmd                                    # Maven wrapper script for Windows
+│   └── pom.xml                                     # Maven Project Object Model configuration file (Spring Boot dependencies)
+├── database                                        # Database files
+├── docs                                            # Project documentation and design files
+├── frontend                                        # Frontend project root
+│   ├── public                                      # Static assets
+│   │   └── ...                                     # Additional public assets
+│   ├── src                                         # Source files for the frontend
+│   │   ├── components                              # Reusable UI components
+│   │   │   ├── common                              # Common/shared components
+│   │   │   ├── sidebar                             # Sidebar-specific components
+│   │   │   └── tasks                               # Task-related components
+│   │   ├── models                                  # Data models used in the frontend
+│   │   ├── services                                # Services for API calls and business logic
+│   │   ├── state/boards                            # State management files for boards
+│   │   ├── types                                   # Type definitions
+│   │   └── ...                                     # Additional source code files
+│   └── ...                                         # Additional frontend files
+├── LICENSE                                         # License file for the project
+└── README.md                                       # Main README with project overview and instructions
+```
 
 <br/>
 
