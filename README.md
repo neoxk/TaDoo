@@ -70,6 +70,12 @@ Whether you’re managing a day-to-day activities, personal or academic goals, T
 - **Task Management:** Tasks can be marked as complete, deleted, or moved between lists.
 - **Responsive UI:** The application provides a clean, user-friendly interface with drag-and-drop functionality.
 
+### Team Members
+
+- Neo Xander Kirbiš
+- Gal Petelin
+- Ena Imamović
+
 <br/>
 
 <!-- TECHNOLOGIES SECTION -->
