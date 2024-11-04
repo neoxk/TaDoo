@@ -1,0 +1,3 @@
+# Project Vision
+
+**TaDoo** is a simple yet powerful task management application designed to help users **organize and prioritize** their tasks within a visually structured environment. Our goal is to **simplify daily planning** and **enhance productivity** by offering a clear, adaptable interface for managing tasks. With customizable boards, task lists, and an option to share tasks, TaDoo meets the needs of individuals and teams across **personal, academic**, and **professional projects**. The application is aimed at users seeking an intuitive tool to improve time management and achieve their goals efficiently.
