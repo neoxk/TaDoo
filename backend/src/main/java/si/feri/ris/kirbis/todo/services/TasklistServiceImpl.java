@@ -24,7 +24,7 @@ public class TasklistServiceImpl implements TasklistService {
     }
 
     @Override
-    public void update(long id, Tasklist tasklist) {
+    public void update(int id, Tasklist tasklist) {
         Optional<Tasklist> searched = repository.findById(id);
         searched.ifPresent(tasklist_old -> {
             tasklist_old.setName(tasklist.getName());
@@ -33,13 +33,13 @@ public class TasklistServiceImpl implements TasklistService {
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(int id) {
         Optional<Tasklist> searched = repository.findById(id);
         searched.ifPresent(tasklist -> repository.delete(tasklist));
     }
 
     @Override
-    public Optional<Tasklist> getById(long id) {
+    public Optional<Tasklist> getById(int id) {
         return repository.findById(id);
     }
 }

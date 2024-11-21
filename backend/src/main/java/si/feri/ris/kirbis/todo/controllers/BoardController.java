@@ -31,14 +31,14 @@ public class BoardController {
     }
 
     @PutMapping(path="/board/{id}")
-    public ResponseEntity<String> update(@PathVariable long id, @RequestBody Board board) {
+    public ResponseEntity<String> update(@PathVariable int id, @RequestBody Board board) {
         service.update(id, board);
         Optional<Board> searched = service.getById(id);
         return ResponseEntity.ok("Updated");
     }
 
     @DeleteMapping(path = "/board/{id}")
-    public ResponseEntity<String> delete(@PathVariable long id) {
+    public ResponseEntity<String> delete(@PathVariable int id) {
         service.delete(id);
         return ResponseEntity.ok("deleted");
     }

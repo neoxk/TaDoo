@@ -30,14 +30,14 @@ public class TasklistController {
     }
 
     @PutMapping("")
-    public ResponseEntity<String> update(@PathVariable long id, @RequestBody Tasklist tasklist) {
+    public ResponseEntity<String> update(@PathVariable int id, @RequestBody Tasklist tasklist) {
         service.update(id, tasklist);
         Optional<Tasklist> searched = service.getById(id);
         return ResponseEntity.ok("Updated");
     }
 
     @DeleteMapping(path = "{id}")
-    public ResponseEntity<String> delete(@PathVariable long id) {
+    public ResponseEntity<String> delete(@PathVariable int id) {
         service.delete(id);
         return ResponseEntity.ok("Deleted");
     }

@@ -11,10 +11,11 @@ import lombok.Data;
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long task_id;
+    private int task_id;
 
     private String name;
     private boolean done;
     private int tasklist_id;
+    private int tag_id;
 
 }

@@ -11,7 +11,7 @@ import lombok.Data;
 public class Tasklist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long tasklist_id;
+    private int tasklist_id;
 
     private String name;
     private int board_id;

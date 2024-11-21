@@ -23,7 +23,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void setDone(long id) {
+    public void setDone(int id) {
         Optional<Task> optionalTask = repository.findById(id);
         if (optionalTask.isPresent()) {
             Task task = optionalTask.get();
@@ -33,7 +33,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void update(long id, Task task) {
+    public void update(int id, Task task) {
         if (repository.existsById(id)) {
             task.setTask_id(id);
             repository.save(task);
@@ -41,7 +41,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(int id) {
         repository.deleteById(id);
     }
 
@@ -51,7 +51,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Optional<Task> getById(long id) {
+    public Optional<Task> getById(int id) {
         return repository.findById(id);
     }
 }

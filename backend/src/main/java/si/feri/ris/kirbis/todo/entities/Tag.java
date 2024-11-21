@@ -11,7 +11,7 @@ import lombok.Data;
 public class Tag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int tag_id;
 
     private String name;
     private String color;

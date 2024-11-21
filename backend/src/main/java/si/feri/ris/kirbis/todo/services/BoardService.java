@@ -8,8 +8,8 @@ import java.util.Optional;
 public interface BoardService {
     public void create(Board board);
     public List<Board> getAll();
-    public void update(long id, Board newBoard);
-    public void delete(long id);
-    public Optional<Board> getById(long id);
+    public void update(int id, Board newBoard);
+    public void delete(int id);
+    public Optional<Board> getById(int id);
 
 }

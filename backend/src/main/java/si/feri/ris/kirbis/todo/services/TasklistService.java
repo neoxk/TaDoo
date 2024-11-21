@@ -9,8 +9,8 @@ import java.util.Optional;
 public interface TasklistService {
     public void create(Tasklist tasklist);
     public List<Tasklist> getAll();
-    public void update(long id, Tasklist tasklist);
-    public void delete(long id);
+    public void update(int id, Tasklist tasklist);
+    public void delete(int id);
 
-    Optional<Tasklist> getById(long id);
+    Optional<Tasklist> getById(int id);
 }

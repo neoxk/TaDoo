@@ -24,7 +24,7 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public void update(long id, Board newBoard) {
+    public void update(int id, Board newBoard) {
       Optional<Board> oldBoard = repository.findById(id);
       oldBoard.ifPresent(board -> {
           board.setName(newBoard.getName());
@@ -33,13 +33,13 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(int id) {
         Optional<Board> board = repository.findById(id);
         board.ifPresent(foundBoard -> repository.delete(foundBoard));
     }
 
     @Override
-    public Optional<Board> getById(long id) {
+    public Optional<Board> getById(int id) {
        return repository.findById(id);
     }
 }

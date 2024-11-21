@@ -29,20 +29,20 @@ public class TaskController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> update(@PathVariable long id, @RequestBody Task task) {
+    public ResponseEntity<String> update(@PathVariable int id, @RequestBody Task task) {
         service.update(id, task);
         Optional<Task> searched = service.getById(id); // assuming getById is implemented in TaskService
         return ResponseEntity.ok("Updated");
     }
 
     @DeleteMapping(path = "{id}")
-    public ResponseEntity<String> delete(@PathVariable long id) {
+    public ResponseEntity<String> delete(@PathVariable int id) {
         service.delete(id);
         return ResponseEntity.ok("Deleted");
     }
 
     @PatchMapping("/{id}/done")
-    public ResponseEntity<String> markAsDone(@PathVariable long id) {
+    public ResponseEntity<String> markAsDone(@PathVariable int id) {
         service.setDone(id);
         return ResponseEntity.ok("Marked as Done");
     }
