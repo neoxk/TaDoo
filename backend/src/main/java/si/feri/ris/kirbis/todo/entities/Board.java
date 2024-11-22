@@ -1,9 +1,6 @@
 package si.feri.ris.kirbis.todo.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,14 +8,17 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 public class Board {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int board_id;
 
     private String name;
-    public Board(String name) {
+
+    private int userId;
+
+    public Board(String name, int user_id) {
         this.name = name;
+        this.userId = user_id;
     }
-
-
 }

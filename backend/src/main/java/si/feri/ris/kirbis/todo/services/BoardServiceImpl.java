@@ -10,8 +10,10 @@ import java.util.Optional;
 
 @Service
 public class BoardServiceImpl implements BoardService{
+
     @Autowired
     private BoardRepository repository;
+
     @Override
     public void create(Board board) {
         System.out.println("Creating board: " + board.getName());
@@ -21,6 +23,11 @@ public class BoardServiceImpl implements BoardService{
     @Override
     public List<Board> getAll() {
         return repository.findAll();
+    }
+
+    @Override
+    public List<Board> getByUserId(int user_id) {
+        return repository.findByUserId(user_id);
     }
 
     @Override

@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:5174")
 @RestController
+@RequestMapping(path= "/api/board")
 public class BoardController {
     private BoardService service;
 
@@ -18,26 +19,31 @@ public class BoardController {
         this.service = service;
     }
 
-    @PostMapping(path="/board")
+    @PostMapping(path="")
     public ResponseEntity<String> create(@RequestBody Board board) {
         service.create(board);
         return ResponseEntity.ok("Created");
     }
 
-    @GetMapping(path="/board")
+    @GetMapping(path="")
     public List<Board> get() {
         System.out.println(service.getAll());
         return service.getAll();
     }
 
-    @PutMapping(path="/board/{id}")
+    @GetMapping("/user/{user_id}")
+    public List<Board> getByUserId(@PathVariable int user_id) {
+        return service.getByUserId(user_id);
+    }
+
+    @PutMapping(path="/{id}")
     public ResponseEntity<String> update(@PathVariable int id, @RequestBody Board board) {
         service.update(id, board);
         Optional<Board> searched = service.getById(id);
         return ResponseEntity.ok("Updated");
     }
 
-    @DeleteMapping(path = "/board/{id}")
+    @DeleteMapping(path = "/{id}")
     public ResponseEntity<String> delete(@PathVariable int id) {
         service.delete(id);
         return ResponseEntity.ok("deleted");
