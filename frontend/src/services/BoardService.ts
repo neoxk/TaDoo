@@ -8,8 +8,10 @@ export class BoardService extends Service {
 
     const board = new Board(1, "Personal")
     const board2 = new Board(2, "Projects")
+    const board3 = new Board(3, "Testing")
+    const board4 = new Board(3, "Random")
 
-    const boards = [board, board2] 
+    const boards = [board, board2, board3, board4]
 
     return Promise.resolve(boards)
   }

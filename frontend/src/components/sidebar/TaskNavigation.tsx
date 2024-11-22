@@ -1,36 +1,46 @@
 import { Button } from "../common/Button";
 import { Icon } from "../../types/types";
-import { useBoards,  } from "../../state/boards/useBoards";
-import {  BoardService } from "../../services/BoardService";
-import { boardActionType } from "../../state/boards/boardReducer";
-import { useEffect } from "preact/hooks";
+import {Board} from "../../models/Board.ts";
+import {useState, useEffect} from "preact/hooks";
 
-export const TaskNavigation = () => {
-  const [boards, dispatch] = useBoards();
-  
+interface TaskNavigationProps {
+    myBoards: Board[];
+    onSelectBoard: (board: Board) => void;
+}
 
-  useEffect(() => {
-    const boardService = new BoardService();
+export const TaskNavigation = ({ myBoards, onSelectBoard }: TaskNavigationProps) => {
 
-    boardService.getBoards().then((boards) => {
-        dispatch({type: boardActionType.SET_BOARDS , payload: {boards: boards}})
-  })
-  
-}, [])
+    const [boards, setBoards] = useState<Board[]>(myBoards);
+
+    useEffect(() => {
+        setBoards(myBoards);
+    }, [myBoards]);
+
+    const addBoard = () => {
+        setBoards([
+            ...boards,
+            new Board(boards.length + 1, "New Board")
+        ]);
+    }
+
+    const removeBoard = (index: number) => {
+        setBoards(boards.filter((_, i) => i !== index));
+    }
 
   return (
     <>
       <p class="font-bold">Boards</p>
       <div class="ml-4 w-full">
-        {console.log(boards)}
-        
-        {boards.map((item) => (
-        <div className="cursor-pointer p-1 hover:bg-slate-200 flex justify-between">
-          <p >{item.name}</p>
-          <Button iconName={Icon.trash} size="xsmall" onClick={() => {}}/>
-        </div>))}
-
-        <Button onClick={() => {}} iconName={Icon.add} size="small"/>
+        {boards.map((item: Board, index: number) => (
+            <div key={item.id} className="cursor-pointer p-1 hover:bg-slate-200 flex justify-between" onClick={() => onSelectBoard(item)}>
+              <p>{item.name}</p>
+              <Button iconName={Icon.trash} size="xsmall" onClick={(e: { stopPropagation: () => void; }) => {
+                  e.stopPropagation();  // to prevent clicking on the board and opening it when deleting it (clicking on the trash icon)
+                  removeBoard(index);
+              }} />
+            </div>
+        ))}
+        <Button onClick={addBoard} iconName={Icon.add} size="small"/>
       </div>
     </>
   );
