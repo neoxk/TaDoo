@@ -3,7 +3,7 @@ import { Color, Icon } from "../../types/types";
 interface ButtonProps {
   text?: string;
   iconUrl?: string;
-  onClick: () => void;
+  onClick: (e: MouseEvent) => void;
   color?: Color;
   iconName?: Icon;
   size: "xsmall" | "small" | "medium" | "large";
@@ -22,7 +22,7 @@ export const Button = ({
     colorClasses = `bg-${color}-300 hover:bg-${color}-700 text-black hover:text-white`;
   }
 
-  let sizeClass: string = "";
+  //let sizeClass: string = "";
   let width: number = 20;
   if (size === "small") {
     width = 20;
