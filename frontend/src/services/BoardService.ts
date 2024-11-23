@@ -16,4 +16,17 @@ export class BoardService extends Service {
     return Promise.resolve(boards)
   }
 
+  public async createBoard(): Promise<Board> {
+    const board = new Board(1, "New Board")
+    return Promise.resolve(board)
+  }
+
+  public async deleteBoard(board_id: number): Promise<void> {
+    return Promise.resolve()
+  }
+  
+  public async updateBoard(board: Board): Promise<Board> {
+    return Promise.resolve(board)
+  }
+
 }
