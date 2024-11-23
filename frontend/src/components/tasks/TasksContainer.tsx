@@ -94,8 +94,7 @@ export function TasksContainer({
       <hr />
       {currTasks.map((task, index) => (
         <TaskCard
-          key={index}
-          name={task.name}
+          task={task}
           tags={task.tags}
           onRemove={() => removeTask(currTasks.indexOf(task))}
           onTagColorChange={(tagName, newColor) =>

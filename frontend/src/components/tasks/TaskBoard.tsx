@@ -18,7 +18,6 @@ interface TaskBoardProps {
 export const TaskBoard = ({ board, handleBoardRename }: TaskBoardProps) => {
   const [tasklists, setTasklists] = useState<Tasklist[]>([]); // useState<Tasklist[]> - switch
   const taskService = new TaskService();
-  const boardService = new BoardService();
 
   useEffect(() => {
     taskService.getTasklists(board.board_id).then((_tasklists) => {

@@ -26,6 +26,14 @@ export const TaskCard = ({
 }: TaskCardProps) => {
   // const [taskTags, setTaskTags] = useState(tags);
 
+  const modalRef = useRef<HTMLDialogElement | null>(null);
+
+  const handleSendClick = () => {
+    if (modalRef.current) {
+      modalRef.current.showModal();
+    }
+  };
+
   return (
     <div class="flex justify-between mt-4 align-center">
       <div>
