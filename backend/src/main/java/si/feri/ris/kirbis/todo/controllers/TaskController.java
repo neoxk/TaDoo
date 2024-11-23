@@ -4,6 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import si.feri.ris.kirbis.todo.entities.Task;
 import si.feri.ris.kirbis.todo.services.TaskService;
+import si.feri.ris.kirbis.todo.services.TasklistService;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,13 +13,19 @@ import java.util.Optional;
 @RequestMapping(path= "/api/task")
 public class TaskController {
     private TaskService service;
+    private TasklistService tasklistService;
 
-    public TaskController(TaskService service) {
+
+    public TaskController(TaskService service, TasklistService tasklistService) {
         this.service = service;
+        this.tasklistService = tasklistService;
     }
 
     @PostMapping("")
     public ResponseEntity<String> create(@RequestBody Task task) {
+        if (tasklistService.getById(task.getTasklistId()).isEmpty()) {
+            return ResponseEntity.badRequest().body("Tasklist not found");
+        }
         service.create(task);
         return ResponseEntity.ok("Created");
     }
@@ -26,6 +33,12 @@ public class TaskController {
     @GetMapping("")
     public List<Task> get() {
         return service.getAll();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Task> getById(@PathVariable int id) {
+        Optional<Task> task = service.getById(id);
+        return task.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
@@ -45,5 +58,10 @@ public class TaskController {
     public ResponseEntity<String> markAsDone(@PathVariable int id) {
         service.setDone(id);
         return ResponseEntity.ok("Marked as Done");
+    }
+
+    @GetMapping("/{id}/share")
+    public ResponseEntity<String> share(@PathVariable int id) {
+        return ResponseEntity.ok(service.share(id));
     }
 }

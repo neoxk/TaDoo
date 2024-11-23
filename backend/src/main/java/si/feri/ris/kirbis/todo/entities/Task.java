@@ -11,9 +11,9 @@ public class Task {
     private int task_id;
 
     private String name;
-    private String description;
     private boolean done;
 
-    private int task_list_id;
+    @Column(name = "task_list_id")
+    private int tasklistId;
     private int tag_id;
 }

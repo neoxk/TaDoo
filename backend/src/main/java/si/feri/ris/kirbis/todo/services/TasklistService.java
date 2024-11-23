@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface TasklistService {
-    public void create(Tasklist tasklist);
-    public List<Tasklist> getAll();
+    public void create(int boardId, Tasklist tasklist);
+    public List<Tasklist> getAll(int boardId);
     public void update(int id, Tasklist tasklist);
     public void delete(int id);
 

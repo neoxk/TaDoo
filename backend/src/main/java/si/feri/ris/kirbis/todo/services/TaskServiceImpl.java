@@ -2,7 +2,9 @@ package si.feri.ris.kirbis.todo.services;
 
 import org.springframework.stereotype.Service;
 import si.feri.ris.kirbis.todo.entities.Task;
+import si.feri.ris.kirbis.todo.entities.Tasklist;
 import si.feri.ris.kirbis.todo.repositories.TaskRepository;
+import si.feri.ris.kirbis.todo.repositories.TasklistRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,10 +13,12 @@ import java.util.Optional;
 public class TaskServiceImpl implements TaskService {
 
     private final TaskRepository repository;
+    private final TasklistRepository tasklistRepository;
 
     // Constructor injection of the repository
-    public TaskServiceImpl(TaskRepository repository) {
+    public TaskServiceImpl(TaskRepository repository, TasklistRepository tasklistRepository) {
         this.repository = repository;
+        this.tasklistRepository = tasklistRepository;
     }
 
     @Override
@@ -37,6 +41,15 @@ public class TaskServiceImpl implements TaskService {
         if (repository.existsById(id)) {
             task.setTask_id(id);
             repository.save(task);
+        }
+    }
+
+    @Override
+    public String share(int id) {
+        if (repository.existsById(id)) {
+            return "http://localhost:8080/api/task/" + id;
+        } else {
+            return "Task not found";
         }
     }
 

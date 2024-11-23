@@ -19,14 +19,16 @@ public class TasklistController {
     }
 
     @PostMapping("")
-    public ResponseEntity<String> create(@RequestBody Tasklist tasklist) {
-        service.create(tasklist);
+    public ResponseEntity<String> create(@RequestParam int boardId, @RequestBody Tasklist tasklist) {
+        service.create(boardId, tasklist);  // Pass boardId and tasklist to the service
         return ResponseEntity.ok("Created");
     }
 
+
+
     @GetMapping("")
-    public List<Tasklist> get() {
-        return service.getAll();
+    public List<Tasklist> get(@RequestParam int board_id) {
+        return service.getAll(board_id);
     }
 
     @PutMapping("")
