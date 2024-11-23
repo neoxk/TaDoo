@@ -55,7 +55,7 @@ export function TasksContainer({ title, tasks, tasklist_id, onDelete }: TasksCon
       </div>
       <hr/>
       {currTasks.map((task, index) => (
-        <TaskCard key={index} name={task.name} tags={task.tags} onRemove={() => removeTask(currTasks.indexOf(task))} onTagColorChange={(tagName, newColor) => handleTagColorChange(index, tagName, newColor)}/>
+        <TaskCard key={index} task={task} tags={task.tags} onRemove={() => removeTask(currTasks.indexOf(task))} onTagColorChange={(tagName, newColor) => handleTagColorChange(index, tagName, newColor)}/>
       ))}
     </div>
   );
