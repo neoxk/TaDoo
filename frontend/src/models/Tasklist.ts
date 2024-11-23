@@ -1,19 +1,17 @@
 import { Board } from "./Board";
+import { Task } from "./Task";
 
 export class Tasklist {
-  private _tasklist_id: number;
-  private _board_id: number;
+  public _tasklist_id: number;
   public name: string;
+  public tasks: Task[];
   
-  constructor(board_id: number, tasklist_id: number, name: string) {
+  constructor(tasklist_id: number, name: string, tasks: Task[]) {
     this._tasklist_id = tasklist_id;
     this.name = name;
-    this._board_id = board_id;
+    this.tasks = tasks;
   }
 
-  get id(): number {
-    return this._tasklist_id;
-  }
 
   
 }
