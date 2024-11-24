@@ -1,6 +1,7 @@
 package si.feri.ris.kirbis.todo.services;
 
 import org.springframework.stereotype.Service;
+import si.feri.ris.kirbis.todo.entities.Tag;
 import si.feri.ris.kirbis.todo.entities.Task;
 import si.feri.ris.kirbis.todo.entities.Tasklist;
 import si.feri.ris.kirbis.todo.repositories.TaskRepository;
@@ -40,9 +41,29 @@ public class TaskServiceImpl implements TaskService {
     public void update(int id, Task task) {
         if (repository.existsById(id)) {
             task.setTask_id(id);
+
+            if (task.getTag() == null) {
+                Task existingTask = repository.findById(id).orElseThrow(() -> new RuntimeException("Task not found"));
+                task.setTag(existingTask.getTag());
+            }
+
+            if (task.getTasklistId() == 0) {
+                Task existingTask = repository.findById(id).orElseThrow(() -> new RuntimeException("Task not found"));
+                task.setTasklistId(existingTask.getTasklistId());
+            }
+
+            if (task.getName() == null) {
+                Task existingTask = repository.findById(id).orElseThrow(() -> new RuntimeException("Task not found"));
+                task.setName(existingTask.getName());
+            }
+
             repository.save(task);
+        } else {
+            throw new RuntimeException("Task not found with id: " + id);
         }
     }
+
+
 
     @Override
     public String share(int id) {

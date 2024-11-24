@@ -34,7 +34,7 @@ public class BoardController {
     }
 
     @GetMapping(path="")
-    public List<Board> get(@RequestParam int user_id) {
+    public List<Board> get(@RequestParam(defaultValue = "1") int user_id) {
         return boardService.getByUserId(user_id);
     }
 

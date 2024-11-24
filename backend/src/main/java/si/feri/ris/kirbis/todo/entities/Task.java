@@ -1,5 +1,6 @@
 package si.feri.ris.kirbis.todo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -15,5 +16,8 @@ public class Task {
 
     @Column(name = "task_list_id")
     private int tasklistId;
-    private int tag_id;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "tag_id", referencedColumnName = "tag_id")
+    private Tag tag;
 }

@@ -20,18 +20,16 @@ public class TasklistController {
 
     @PostMapping("")
     public ResponseEntity<String> create(@RequestParam int boardId, @RequestBody Tasklist tasklist) {
-        service.create(boardId, tasklist);  // Pass boardId and tasklist to the service
+        service.create(boardId, tasklist);
         return ResponseEntity.ok("Created");
     }
-
-
 
     @GetMapping("")
     public List<Tasklist> get(@RequestParam int board_id) {
         return service.getAll(board_id);
     }
 
-    @PutMapping("")
+    @PutMapping("/{id}")
     public ResponseEntity<String> update(@PathVariable int id, @RequestBody Tasklist tasklist) {
         service.update(id, tasklist);
         Optional<Tasklist> searched = service.getById(id);

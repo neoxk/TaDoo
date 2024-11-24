@@ -32,7 +32,8 @@ CREATE TABLE board (
 -- Task List table
 CREATE TABLE task_list (
     task_list_id INT AUTO_INCREMENT PRIMARY KEY,
-    name         VARCHAR(40) NOT NULL
+    name         VARCHAR(40) NOT NULL,
+    board_id     INT
 );
 
 -- Board Task List table
@@ -41,9 +42,9 @@ CREATE TABLE board_task_list (
     task_list_id       INT NOT NULL,
     board_id           INT NOT NULL,
     CONSTRAINT board_task_list_board_FK
-        FOREIGN KEY (board_id) REFERENCES board (board_id),
+        FOREIGN KEY (board_id) REFERENCES board (board_id) ON DELETE CASCADE,
     CONSTRAINT board_task_list_task_list_FK
-        FOREIGN KEY (task_list_id) REFERENCES task_list (task_list_id)
+        FOREIGN KEY (task_list_id) REFERENCES task_list (task_list_id) ON DELETE CASCADE
 );
 
 -- Tag table

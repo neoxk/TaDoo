@@ -23,7 +23,7 @@ public class Tasklist {
     private String name;
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "board_id", referencedColumnName = "board_id")
     @JsonIgnore
     private Board board;
@@ -31,7 +31,4 @@ public class Tasklist {
     @Transient
     private List<Task> tasks;
 
-    public int getBoardId() {
-        return board != null ? board.getBoardId() : 0;
-    }
 }

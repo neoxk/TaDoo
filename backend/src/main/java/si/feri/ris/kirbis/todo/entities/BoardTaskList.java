@@ -12,11 +12,11 @@ public class BoardTaskList {
     @Column(name = "board_task_list_id")
     private int boardTaskListId;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "board_id")
     private Board board;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "task_list_id")
     private Tasklist tasklist;
 }

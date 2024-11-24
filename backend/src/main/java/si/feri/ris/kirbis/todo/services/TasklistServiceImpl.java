@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import si.feri.ris.kirbis.todo.entities.Board;
 import si.feri.ris.kirbis.todo.entities.BoardTaskList;
+import si.feri.ris.kirbis.todo.entities.Task;
 import si.feri.ris.kirbis.todo.entities.Tasklist;
 import si.feri.ris.kirbis.todo.repositories.BoardRepository;
 import si.feri.ris.kirbis.todo.repositories.BoardTaskListRepository;
@@ -12,6 +13,7 @@ import si.feri.ris.kirbis.todo.repositories.TasklistRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class TasklistServiceImpl implements TasklistService {
@@ -30,27 +32,36 @@ public class TasklistServiceImpl implements TasklistService {
 
     @Override
     public void create(int boardId, Tasklist tasklist) {
-        // Find the board by boardId
         Board board = boardRepository.findById(boardId)
                 .orElseThrow(() -> new IllegalArgumentException("Board not found: " + boardId));
 
-        // Save the tasklist first (this inserts into the task_list table)
-        tasklist = repository.save(tasklist);  // Save tasklist and get the generated tasklist_id
+        tasklist = repository.save(tasklist);
 
-        // Create the BoardTaskList entry to link Tasklist and Board
         BoardTaskList boardTaskList = new BoardTaskList();
-        boardTaskList.setBoard(board);  // Set the board entity
-        boardTaskList.setTasklist(tasklist);  // Set the tasklist entity
+        boardTaskList.setBoard(board);
+        boardTaskList.setTasklist(tasklist);
 
-        // Save the BoardTaskList entry (this inserts into the board_task_list table)
         boardTaskListRepository.save(boardTaskList);
     }
 
-
     @Override
     public List<Tasklist> getAll(int boardId) {
-        List<Tasklist> tasklists = repository.findByBoard_BoardId(boardId);
-        tasklists.forEach(tasklist -> tasklist.setTasks(taskRepository.findByTasklistId(tasklist.getTasklistId())));
+        Board board = boardRepository.findById(boardId)
+                .orElseThrow(() -> new IllegalArgumentException("Board not found: " + boardId));
+
+        System.out.println(board);
+
+        List<BoardTaskList> boardTaskLists = boardTaskListRepository.findByBoard_BoardId(boardId);
+        List<Tasklist> tasklists = boardTaskLists.stream()
+                .map(BoardTaskList::getTasklist)
+                .collect(Collectors.toList());
+
+        System.out.println(tasklists);
+
+        tasklists.forEach(tasklist -> {
+            List<Task> tasks = taskRepository.findByTasklistId(tasklist.getTasklistId());
+            tasklist.setTasks(tasks);
+        });
         return tasklists;
     }
 
