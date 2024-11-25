@@ -13,6 +13,13 @@ export class Task {
     this.done = done;
     this.tags = tags;
   }
+
+  public static fromJson(json: any): Task {
+    if (!json.tags) json.tags = []
+    return new Task(json.task_id, json.name, json.done, json.tags.map((tag: any) => Tag.fromJson(tag)));
+  }
+
+  
   
 
 }

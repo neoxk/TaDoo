@@ -12,6 +12,11 @@ export class Tasklist {
     this.tasks = tasks;
   }
 
+  public static fromJson(json: any): Tasklist {
+    if (!json.tasks) json.tasks = [];
+    return new Tasklist(json.tasklistId, json.name, json.tasks.map((task: any) => Task.fromJson(task)));
+  }
+
 
   
 }

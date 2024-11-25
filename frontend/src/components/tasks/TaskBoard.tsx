@@ -21,9 +21,10 @@ export const TaskBoard = ({ board, handleBoardRename }: TaskBoardProps) => {
 
   useEffect(() => {
     taskService.getTasklists(board.board_id).then((_tasklists) => {
-      setTasklists(_tasklists);
+      const tasklists = _tasklists.map((tl) => Tasklist.fromJson(tl));
+      setTasklists(tasklists);
     });
-  }, []);
+  }, [board]);
 
   const handleDeleteTaskList = (tasklist_id: number) => {
     taskService.deleteTasklist(tasklist_id).then((_) => {
@@ -35,11 +36,11 @@ export const TaskBoard = ({ board, handleBoardRename }: TaskBoardProps) => {
   };
 
   const handleCreateTaskList = () => {
-    taskService
-      .createTasklist(board.board_id, "New Tasklist")
-      .then((tasklist) => {
-        setTasklists([...tasklists, tasklist]);
-      });
+    taskService.createTasklist(board.board_id).then((tasklist) => {
+      console.log(tasklist);
+      tasklist = Tasklist.fromJson(tasklist);
+      setTasklists([...tasklists, tasklist]);
+    });
   };
 
   const handleTasklistChange = (updatedTasklist: Tasklist) => {
