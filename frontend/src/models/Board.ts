@@ -7,6 +7,10 @@ export class Board {
     this.name = name;
   }
 
+  public static fromJson(json: any): Board {
+    return new Board(json.boardId, json.name);
+  }
+
   
 
 }

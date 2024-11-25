@@ -12,7 +12,8 @@ export function App() {
 
   useEffect(() => {
     const fetchBoards = async () => {
-      const boards = await boardService.getBoards();
+      let boards = await boardService.getBoards();
+      boards = boards.map((board) => Board.fromJson(board));
       setBoards(boards);
       if (boards.length > 0) setSelectedBoard(boards[0]); // default prikaz : prvi board
     };

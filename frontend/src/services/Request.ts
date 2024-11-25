@@ -7,12 +7,12 @@ export class Request {
     this.token = token;
   }
 
-  public request(method: string, data?: any): Promise<any> {
+  private request(method: string, data?: any): Promise<any> {
     return fetch(this._url, {
       method,
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${this.token}`,
+        // Authorization: `Bearer ${this.token}`,
       },
       body: data ? JSON.stringify(data) : undefined,
     }).then((response) => response.json());
@@ -22,7 +22,7 @@ export class Request {
     return this.request("GET");
   }
 
-  public post(data: any): Promise<any> {
+  public post(data: any = undefined): Promise<any> {
     return this.request("POST", data);
   }
   
@@ -31,6 +31,6 @@ export class Request {
   }
 
   public delete(): Promise<any> {
-    return this.request("DELETE");
+    return this.request("DELETE").then(response => console.log(response));
   }
 }
