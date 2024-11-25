@@ -1,12 +1,25 @@
 package si.feri.ris.kirbis.todo.services;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import si.feri.ris.kirbis.todo.entities.Tag;
 import si.feri.ris.kirbis.todo.entities.Task;
 import si.feri.ris.kirbis.todo.entities.Tasklist;
 import si.feri.ris.kirbis.todo.repositories.TaskRepository;
 import si.feri.ris.kirbis.todo.repositories.TasklistRepository;
 
+import java.io.ByteArrayOutputStream;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,7 +29,6 @@ public class TaskServiceImpl implements TaskService {
     private final TaskRepository repository;
     private final TasklistRepository tasklistRepository;
 
-    // Constructor injection of the repository
     public TaskServiceImpl(TaskRepository repository, TasklistRepository tasklistRepository) {
         this.repository = repository;
         this.tasklistRepository = tasklistRepository;
@@ -73,6 +85,36 @@ public class TaskServiceImpl implements TaskService {
             return "Task not found";
         }
     }
+
+    @Override
+    public ResponseEntity<byte[]> createQRCode(int id) {
+        if (repository.existsById(id)) {
+            String baseUrl = "http://localhost:8080/api/task/";
+            String taskUrl = baseUrl + id;
+
+            try {
+                ByteArrayOutputStream qrCodeOutputStream = new ByteArrayOutputStream();
+                QRCodeWriter qrCodeWriter = new QRCodeWriter();
+
+                Hashtable<EncodeHintType, Object> hintMap = new Hashtable<>();
+                hintMap.put(EncodeHintType.CHARACTER_SET, StandardCharsets.UTF_8.name());
+                hintMap.put(EncodeHintType.MARGIN, 1);
+
+                BitMatrix bitMatrix = qrCodeWriter.encode(taskUrl, BarcodeFormat.QR_CODE, 100, 100, hintMap);
+                MatrixToImageWriter.writeToStream(bitMatrix, "PNG", qrCodeOutputStream);
+                byte[] qrCodeImage = qrCodeOutputStream.toByteArray();
+
+                HttpHeaders headers = new HttpHeaders();
+                headers.set("Content-Type", "image/png");
+                return new ResponseEntity<>(qrCodeImage, headers, HttpStatus.OK);
+            } catch (Exception e) {
+                return new ResponseEntity<>(new byte[0], HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        } else {
+            return new ResponseEntity<>(new byte[0], HttpStatus.NOT_FOUND);
+        }
+    }
+
 
     @Override
     public void delete(int id) {

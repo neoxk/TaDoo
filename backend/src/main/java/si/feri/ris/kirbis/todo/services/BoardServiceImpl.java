@@ -43,20 +43,16 @@ public class BoardServiceImpl implements BoardService{
         Optional<Board> board = boardRepository.findById(boardId);
 
         board.ifPresent(b -> {
-            // Fetch all BoardTaskList entries associated with the boardId
             List<BoardTaskList> boardTaskLists = boardTaskListRepository.findByBoard_BoardId(boardId);
 
-            // Extract Tasklist entities from BoardTaskList
             List<Tasklist> tasklists = new ArrayList<>();
             boardTaskLists.forEach(boardTaskList -> {
-                Tasklist tasklist = boardTaskList.getTasklist();  // Access the Tasklist through the junction table
+                Tasklist tasklist = boardTaskList.getTasklist();
                 tasklists.add(tasklist);
             });
 
-            // Set the Tasklists in the Board entity
             b.setTasklists(tasklists);
 
-            // Optionally, fetch tasks for each Tasklist (if necessary)
             tasklists.forEach(tasklist -> {
                 List<Task> tasks = taskRepository.findByTasklistId(tasklist.getTasklistId());
                 tasklist.setTasks(tasks);

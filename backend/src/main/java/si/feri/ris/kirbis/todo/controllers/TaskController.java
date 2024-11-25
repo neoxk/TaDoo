@@ -71,4 +71,9 @@ public class TaskController {
     public ResponseEntity<String> share(@PathVariable int id) {
         return ResponseEntity.ok(service.share(id));
     }
+
+    @GetMapping("/{id}/qr")
+    public ResponseEntity<byte[]> createQRCode(@PathVariable int id) {
+        return service.createQRCode(id);
+    }
 }
