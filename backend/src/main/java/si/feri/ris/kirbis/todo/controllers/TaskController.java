@@ -5,10 +5,13 @@ import org.springframework.web.bind.annotation.*;
 import si.feri.ris.kirbis.todo.entities.Task;
 import si.feri.ris.kirbis.todo.services.TaskService;
 import si.feri.ris.kirbis.todo.services.TasklistService;
+import si.feri.ris.kirbis.todo.util.SimpleBody;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:5174")
 @RestController
 @RequestMapping(path= "/api/task")
 public class TaskController {
@@ -22,13 +25,14 @@ public class TaskController {
     }
 
     @PostMapping("")
-    public ResponseEntity<String> create(@RequestBody Task task) {
-        if (tasklistService.getById(task.getTasklistId()).isEmpty()) {
-            return ResponseEntity.badRequest().body("Tasklist not found");
-        }
+    public Task create(@RequestParam int tasklist_id) {
+        Task task = new Task();
+        task.setName("New Task");
+        task.setTasklistId(tasklist_id);
+
         service.create(task);
 
-        return ResponseEntity.ok("Created");
+        return task;
     }
 
 
@@ -44,16 +48,17 @@ public class TaskController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> update(@PathVariable int id, @RequestBody Task task) {
+    public ResponseEntity<Task> update(@PathVariable int id, @RequestBody Task task) {
         service.update(id, task);
-        Optional<Task> searched = service.getById(id); // assuming getById is implemented in TaskService
-        return ResponseEntity.ok("Updated");
+        return service.getById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping(path = "{id}")
-    public ResponseEntity<String> delete(@PathVariable int id) {
+    public Map<String, String> delete(@PathVariable int id) {
         service.delete(id);
-        return ResponseEntity.ok("Deleted");
+        return SimpleBody.success();
     }
 
     @PatchMapping("/{id}/done")

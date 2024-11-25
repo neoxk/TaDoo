@@ -7,11 +7,9 @@ import si.feri.ris.kirbis.todo.entities.Tasklist;
 import si.feri.ris.kirbis.todo.services.BoardService;
 import si.feri.ris.kirbis.todo.services.TaskService;
 import si.feri.ris.kirbis.todo.services.TasklistService;
+import si.feri.ris.kirbis.todo.util.SimpleBody;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @CrossOrigin(origins = "http://localhost:5174")
 @RestController
@@ -28,9 +26,11 @@ public class BoardController {
     }
 
     @PostMapping(path="")
-    public ResponseEntity<String> create(@RequestBody Board board) {
+    public Board create() {
+        Board board = new Board();
+        board.setName("New Board");
         boardService.create(board);
-        return ResponseEntity.ok("Created");
+        return board;
     }
 
     @GetMapping(path="")
@@ -56,13 +56,13 @@ public class BoardController {
     public ResponseEntity<String> update(@PathVariable int id, @RequestBody Board board) {
         boardService.update(id, board);
         Optional<Board> searched = boardService.getById(id);
-        return ResponseEntity.ok("Updated");
+        return ResponseEntity.ok("{status: updated}");
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<String> delete(@PathVariable int id) {
+    public Map delete(@PathVariable int id) {
         boardService.delete(id);
-        return ResponseEntity.ok("deleted");
+        return SimpleBody.success();
     }
 
 }

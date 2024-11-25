@@ -7,6 +7,7 @@ import si.feri.ris.kirbis.todo.services.UserService;
 
 @RestController
 @RequestMapping(path= "/api/user")
+@CrossOrigin(origins = "http://localhost:5174")
 public class UserController {
 
     private UserService service;
