@@ -33,4 +33,8 @@ export class Request {
   public delete(): Promise<any> {
     return this.request("DELETE").then(response => console.log(response));
   }
+
+  public patch(): Promise<any> {
+    return this.request("PATCH");
+  }
 }

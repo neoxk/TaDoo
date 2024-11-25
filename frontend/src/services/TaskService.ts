@@ -66,6 +66,21 @@ export class TaskService extends Service {
     return super.newRequest("/tasklist/" + tasklist._tasklist_id).put(tasklist).then(json => Tasklist.fromJson(json))
   }
 
+  public async getTaskById(task_id: number): Promise<Task> {
+    const response = await super.newRequest("/task/" + task_id).get()
+    return Task.fromJson(response); 
+  }
+
+  public async getQRCode(task_id: number): Promise<string> {
+    const response = await super.newRequest("/task/" + task_id + "/qr").get()
+    return response;
+  }
+
+  public async markAsDone(task_id: number): Promise<void> {
+    const response = await super.newRequest("/task/" + task_id + "/done").patch()
+    return response;
+  }
+
 
 
 }

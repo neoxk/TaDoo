@@ -1,5 +1,6 @@
 package si.feri.ris.kirbis.todo.controllers;
 
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import si.feri.ris.kirbis.todo.entities.Task;
@@ -76,4 +77,14 @@ public class TaskController {
     public ResponseEntity<byte[]> createQRCode(@PathVariable int id) {
         return service.createQRCode(id);
     }
+
+//    @GetMapping(value = "/{id}/qr", produces = MediaType.IMAGE_PNG_VALUE)
+//    public ResponseEntity<byte[]> createQRCode(@PathVariable int id) {
+//        byte[] qrCode = service.createQRCode(id);
+//
+//        return ResponseEntity.ok()
+//                .header("Content-Type", MediaType.IMAGE_PNG_VALUE)
+//                .header("Content-Disposition", "inline; filename=\"qr.png\"")
+//                .body(qrCode);
+//    }
 }

@@ -5,8 +5,9 @@ import { Checkbox } from "../common/Checkbox";
 import { EditableText } from "../common/EditableText";
 import { TagView } from "./TagView";
 import { ShareMenu } from "../common/ShareMenu.tsx";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Task } from "../../models/Task.ts";
+import { TaskService } from "../../services/TaskService.ts";
 // import {useState} from "preact/hooks";
 
 export interface TaskCardProps {
@@ -27,6 +28,8 @@ export const TaskCard = ({
   // const [taskTags, setTaskTags] = useState(tags);
 
   const modalRef = useRef<HTMLDialogElement | null>(null);
+  const taskService = new TaskService();
+  const [done, setDone] = useState(task.done);
 
   const handleSendClick = () => {
     if (modalRef.current) {
@@ -34,11 +37,17 @@ export const TaskCard = ({
     }
   };
 
+  const handleCheckboxClick = () => {
+    taskService.markAsDone(task._task_id).then(() => {
+      setDone(true);
+    });
+  };
+
   return (
     <div class="flex justify-between mt-4 align-center">
       <div>
         <div class="inline-flex items-center gap-2">
-          <Checkbox checked={false} />
+          <Checkbox checked={done} handleCheck={handleCheckboxClick} />
           <EditableText
             text={task.name}
             handleChange={(newText) =>

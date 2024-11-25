@@ -26,7 +26,7 @@ export class BoardService extends Service {
   }
   
   public async updateBoard(board: Board): Promise<Board> {
-    return super.newRequest(`/board/${board.board_id}`).put(board)
+    return super.newRequest(`/board/${board.board_id}`).put(board).then(json => Board.fromJson(json))
   }
 
 }

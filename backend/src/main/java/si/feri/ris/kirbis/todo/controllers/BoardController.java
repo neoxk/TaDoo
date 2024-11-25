@@ -53,10 +53,11 @@ public class BoardController {
     */
 
     @PutMapping(path="/{id}")
-    public ResponseEntity<String> update(@PathVariable int id, @RequestBody Board board) {
+    public ResponseEntity<Board> update(@PathVariable int id, @RequestBody Board board) {
         boardService.update(id, board);
-        Optional<Board> searched = boardService.getById(id);
-        return ResponseEntity.ok("{status: updated}");
+        return boardService.getById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping(path = "/{id}")

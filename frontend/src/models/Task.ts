@@ -1,5 +1,4 @@
 import { Tag } from "./Tag";
-import { Tasklist } from "./Tasklist";
 
 export class Task {
   public _task_id: number;
