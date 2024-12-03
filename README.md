@@ -215,6 +215,7 @@ Below is an overview of the project structure.
 │   │   ├── types                                   # Type definitions
 │   │   └── ...                                     # Additional source code files
 │   └── ...                                         # Additional frontend files
+├── testing                                         # Testing documentation
 ├── LICENSE                                         # License file for the project
 └── README.md                                       # Main README with project overview and instructions
 ```
