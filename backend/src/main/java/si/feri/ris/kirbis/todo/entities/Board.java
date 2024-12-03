@@ -3,6 +3,7 @@ package si.feri.ris.kirbis.todo.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -19,6 +20,7 @@ public class Board {
     @Column(name = "board_id")
     private int boardId;
 
+    @NotNull(message = "Name cannot be null")
     private String name;
 
     private int userId = 1;
