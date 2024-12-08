@@ -31,6 +31,9 @@ export const DetailsMenu = forwardRef<HTMLDialogElement, DetailsMenuProps>(
                 className="text-gray-500 hover:text-gray-800 focus:outline-none"
                 onClick={closeModal}
                 aria-label="Close"
+                className="text-gray-500 hover:text-gray-800 focus:outline-none"
+                onClick={closeModal}
+                aria-label="Close"
             >
               ✕
             </button>
@@ -58,8 +61,18 @@ export const DetailsMenu = forwardRef<HTMLDialogElement, DetailsMenuProps>(
 
         <div className="flex justify-end border-t pt-4">
           <button
+        <div className="flex justify-end border-t pt-4">
+          <button
               className="btn bg-gray-300 text-gray-800 hover:bg-gray-400 transition rounded-md px-4 py-2"
               onClick={closeModal}
+          >
+            Close
+          </button>
+        </div>
+      </div>
+  </dialog>
+  )
+    ;
           >
             Close
           </button>
