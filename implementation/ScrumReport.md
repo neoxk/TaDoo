@@ -24,17 +24,18 @@ Story points do not directly translate to hours but help gauge effort based on t
 ## Tasks Breakdown and Estimates
 The user story was broken down into smaller, manageable tasks. Each task was assigned an estimated effort using the Planning Poker method, with story points (SP) as the unit of estimation.
 
-| Task                                         | Details                                                                       | Time Estimate |
-|----------------------------------------------|-------------------------------------------------------------------------------|---------------|
-| **Adjust the Data Model (Backend)**          | Add a field for storing paths or references to attachments in the task model. | 2 SP          |
-|                                              | Ensure support for file types like PDF, JPEG, and PNG.                        |               |
-| **Implement REST API for Attachments**       | Create endpoints for uploading and retrieving files (download).               | 3 SP          |
-|                                              | Add basic file validation (e.g., type and size).                              |               |
-| **Add File Upload Functionality (Frontend)** | Add a button and modal for uploading files on the existing task page.         | 3 SP          |
-|                                              | Implement frontend validation for errors (e.g., oversized files).             |               |
-| **Display Uploaded Attachments (Frontend)**  | Display a list of uploaded attachments with buttons for download and delete.  | 3 SP          |
-| **Testing and Quality Assurance**            | Write unit tests for backend validation (e.g., file type and size).           | 2 SP          |
-|                                              | Test frontend functionality and ensure a good user experience.                |               |
+| Task                                         | Details                                                                           | Time Estimate |
+|----------------------------------------------|-----------------------------------------------------------------------------------|---------------|
+| **Adjust the Data Model (Backend)**          | Add a field for storing paths or references to attachments in the task model.     | 2 SP          |
+|                                              | Ensure support for file types like PDF, JPEG, and PNG.                            |               |
+| **Implement REST API for Attachments**       | Create endpoints for uploading and retrieving files (download).                   | 3 SP          |
+|                                              | Add basic file validation (e.g., type and size).                                  |               |
+| **Add File Upload Functionality (Frontend)** | Add a button and modal for uploading files on the existing task page.             | 3 SP          |
+|                                              | Implement frontend validation for errors (e.g., oversized files).                 |               |
+| **Display Uploaded Attachments (Frontend)**  | Display a button for downloading and deleting attachments.                        | 2 SP          |
+| **Connect Frontend and Backend**             | Connect the frontend with the backend to assure the functionality works properly. | 3 SP          |
+| **Testing and Quality Assurance**            | Write unit tests for backend validation (e.g., file type and size).               | 2 SP          |
+|                                              | Test frontend functionality and ensure a good user experience.                    |               |
 
 ---
 
@@ -54,36 +55,34 @@ The board is updated regularly to reflect the current state of tasks.
 ## Implementation Details
 ### Backend
 1. **Data Model Adjustments:**
-   
 
 2. **REST API:**
-   
 
 ### Frontend
 1. **File Upload Functionality:**
-    
 
 2. **Display Attachments:**
-    
+
+### Connection
+1. **Frontend Adjustments:**
 
 ### Testing
 1. **Backend Tests:**
-   
 
-2. **Frontend Testing:**
-    
+2. **Frontend Testing:** 
 
 ---
 
 ## Progress Summary
 ### Current Status:
-| Task                           | Status |
-|--------------------------------|--------|
-| Adjust Data Model (Backend)    | ToDo   |
-| Implement REST API (Backend)   | ToDo   |
-| Add File Upload (Frontend)     | ToDo   |
-| Display Attachments (Frontend) | ToDo   |
-| Testing and QA                 | ToDo   |
+| Task                              | Status      |
+|-----------------------------------|-------------|
+| Adjust Data Model (Backend)       | ToDo        |
+| Implement REST API (Backend)      | ToDo        |
+| Add File Upload (Frontend)        | In Progress |
+| Display Attachments (Frontend)    | In Progress |
+| Connect Frontend and Backend      | ToDo        |
+| Testing and QA                    | ToDo        |
 
 
 
