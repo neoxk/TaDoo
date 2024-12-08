@@ -80,7 +80,7 @@ The board is updated regularly to reflect the current state of tasks.
 ### Current Status:
 | Task                              | Status      |
 |-----------------------------------|-------------|
-| Adjust Data Model (Backend)       | ToDo        |
+| Adjust Data Model (Backend)       | In Progress |
 | Implement REST API (Backend)      | Done        |
 | Add File Upload (Frontend)        | In Progress |
 | Display Attachments (Frontend)    | In Progress |
