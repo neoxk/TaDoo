@@ -55,7 +55,7 @@ The board is updated regularly to reflect the current state of tasks.
 ## Implementation Details
 ### Backend
 1. **Data Model Adjustments:**
-    - Added file_path and has_file to task 
+    - Added file_path and has_file to task
 
 2. **REST API:**
     - Added post endpoint for uploading files
