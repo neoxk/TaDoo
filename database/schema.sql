@@ -60,7 +60,10 @@ CREATE TABLE task (
     name         VARCHAR(30) NOT NULL,
     task_list_id INT NOT NULL,
     CONSTRAINT task_task_list_FK
-        FOREIGN KEY (task_list_id) REFERENCES task_list (task_list_id)
+        FOREIGN KEY (task_list_id) REFERENCES task_list (task_list_id),
+    done		 INT,
+    file_path	 VARCHAR(255),
+    has_file	 INT
 );
 
 -- Task Tag table
