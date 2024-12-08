@@ -8,7 +8,7 @@ import { ShareMenu } from "../common/ShareMenu.tsx";
 import { useRef, useState } from "react";
 import { Task } from "../../models/Task.ts";
 import { TaskService } from "../../services/TaskService.ts";
-// import {useState} from "preact/hooks";
+import {DetailsMenu} from "../common/DetailsMenu.tsx";
 
 export interface TaskCardProps {
   task: Task;
@@ -27,13 +27,20 @@ export const TaskCard = ({
 }: TaskCardProps) => {
   // const [taskTags, setTaskTags] = useState(tags);
 
-  const modalRef = useRef<HTMLDialogElement | null>(null);
+  const shareMenuRef = useRef<HTMLDialogElement | null>(null);
+  const detailsMenuRef = useRef<HTMLDialogElement | null>(null);
   const taskService = new TaskService();
   const [done, setDone] = useState(task.done);
 
   const handleSendClick = () => {
-    if (modalRef.current) {
-      modalRef.current.showModal();
+    if (shareMenuRef.current) {
+      shareMenuRef.current.showModal();
+    }
+  };
+
+  const handleDetailsClick = () => {
+    if (detailsMenuRef.current) {
+      detailsMenuRef.current.showModal();
     }
   };
 
@@ -67,8 +74,10 @@ export const TaskCard = ({
       <div class="flex gap-2 self-center">
         <Button onClick={onRemove} size="small" iconName={Icon.trash} />
         <Button onClick={handleSendClick} size="small" iconName={Icon.send} />
+        <Button onClick={handleDetailsClick} size="small" iconName={Icon.details} />
       </div>
-      <ShareMenu ref={modalRef} task={task} />
+      <ShareMenu ref={shareMenuRef} task={task} />
+      <DetailsMenu ref={detailsMenuRef} task={task} />
     </div>
   );
 };

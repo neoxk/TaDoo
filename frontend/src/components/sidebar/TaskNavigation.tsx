@@ -29,7 +29,7 @@ export const TaskNavigation = ({
 
   const removeBoard = (id: number) => {
     boardService.deleteBoard(id).then(() => {
-      setBoards(boards.filter((board, i) => board.board_id !== id));
+      setBoards(boards.filter((board) => board.board_id !== id));
     });
   };
 
@@ -37,7 +37,7 @@ export const TaskNavigation = ({
     <>
       <p class="font-bold">Boards</p>
       <div class="ml-4 w-full">
-        {boards.map((item: Board, index: number) => (
+        {boards.map((item: Board) => (
           <div
             key={item.board_id}
             className="cursor-pointer p-1 hover:bg-slate-200 flex justify-between"

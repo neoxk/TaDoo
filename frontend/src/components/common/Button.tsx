@@ -37,9 +37,10 @@ export const Button = ({
     width = 15;
   }
 
-  if (iconName && iconName === "trash") iconUrl = "/public/icon_trash.svg";
-  if (iconName && iconName === "send") iconUrl = "/public/icon_send.svg";
-  if (iconName && iconName === "add") iconUrl = "/public/icon_add.svg";
+  if (iconName && iconName === "trash") iconUrl = "/icon_trash.svg";
+  if (iconName && iconName === "send") iconUrl = "/icon_send.svg";
+  if (iconName && iconName === "add") iconUrl = "/icon_add.svg";
+  if (iconName && iconName === "details") iconUrl = "/icon_details.svg";
 
   return (
     <button onClick={onClick} className={`${colorClasses} rounded`}>

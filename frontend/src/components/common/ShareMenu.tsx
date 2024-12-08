@@ -1,6 +1,5 @@
 import { forwardRef, useState } from "preact/compat";
 import { Task } from "../../models/Task.ts";
-import { TaskService } from "../../services/TaskService.ts";
 
 interface ShareMenuProps {
   task: Task;
