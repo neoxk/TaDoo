@@ -82,8 +82,8 @@ The board is updated regularly to reflect the current state of tasks.
 |-----------------------------------|-------------|
 | Adjust Data Model (Backend)       | Done        |
 | Implement REST API (Backend)      | Done        |
-| Add File Upload (Frontend)        | In Progress |
-| Display Attachments (Frontend)    | In Progress |
+| Add File Upload (Frontend)        | Done        |
+| Display Attachments (Frontend)    | Done        |
 | Connect Frontend and Backend      | In Progress |
 | Testing and QA                    | In Progress |
 
