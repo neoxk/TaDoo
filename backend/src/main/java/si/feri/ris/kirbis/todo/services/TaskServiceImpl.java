@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 import si.feri.ris.kirbis.todo.entities.Tag;
 import si.feri.ris.kirbis.todo.entities.Task;
 import si.feri.ris.kirbis.todo.entities.Tasklist;
@@ -17,8 +18,12 @@ import si.feri.ris.kirbis.todo.repositories.TaskRepository;
 import si.feri.ris.kirbis.todo.repositories.TasklistRepository;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Optional;
@@ -115,6 +120,35 @@ public class TaskServiceImpl implements TaskService {
         }
     }
 
+    @Override
+    public String fileUpload(int id, MultipartFile file) {
+        String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+
+        String appRoot = System.getProperty("user.dir");
+        Path uploadPath = Paths.get(appRoot, "uploads", fileName);
+
+        try {
+            if (!Files.exists(uploadPath.getParent())) {
+                Files.createDirectories(uploadPath.getParent());
+            }
+
+            file.transferTo(uploadPath.toFile());
+
+            Task task = repository.findById(id).orElseThrow(() -> new RuntimeException("Task not found"));
+
+            String relativeFilePath = "/uploads/" + fileName;
+            task.setFile_path(relativeFilePath);
+            task.setHas_file(true);
+
+            repository.save(task);
+
+            String fileUrl = "/uploads/" + fileName;
+            return fileUrl;
+
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to upload file", e);
+        }
+    }
 
     @Override
     public void delete(int id) {

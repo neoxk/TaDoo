@@ -1,6 +1,7 @@
 package si.feri.ris.kirbis.todo.services;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
 import si.feri.ris.kirbis.todo.entities.Task;
 import si.feri.ris.kirbis.todo.entities.Tasklist;
 
@@ -16,4 +17,5 @@ public interface TaskService {
     public ResponseEntity<byte[]> createQRCode(int id);
     public List<Task> getAll();
     public Optional<Task> getById(int id);
+    public String fileUpload(int id, MultipartFile file);
 }

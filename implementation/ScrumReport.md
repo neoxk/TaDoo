@@ -57,6 +57,9 @@ The board is updated regularly to reflect the current state of tasks.
 1. **Data Model Adjustments:**
 
 2. **REST API:**
+    - Added post endpoint for uploading files
+    - Added get endpoint for retrieving files
+    - Fixed database scheme
 
 ### Frontend
 1. **File Upload Functionality:**
@@ -78,7 +81,7 @@ The board is updated regularly to reflect the current state of tasks.
 | Task                              | Status      |
 |-----------------------------------|-------------|
 | Adjust Data Model (Backend)       | ToDo        |
-| Implement REST API (Backend)      | In Progress |
+| Implement REST API (Backend)      | Done        |
 | Add File Upload (Frontend)        | In Progress |
 | Display Attachments (Frontend)    | In Progress |
 | Connect Frontend and Backend      | ToDo        |

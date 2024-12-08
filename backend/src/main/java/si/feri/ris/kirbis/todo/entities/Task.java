@@ -20,4 +20,7 @@ public class Task {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "tag_id", referencedColumnName = "tag_id")
     private Tag tag;
+
+    private String file_path;
+    private boolean has_file;
 }
