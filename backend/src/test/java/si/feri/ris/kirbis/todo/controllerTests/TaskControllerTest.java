@@ -8,12 +8,18 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mock.web.MockMultipartFile;
 import si.feri.ris.kirbis.todo.entities.Task;
 import si.feri.ris.kirbis.todo.entities.Tag;
+import si.feri.ris.kirbis.todo.repositories.TaskRepository;
 import si.feri.ris.kirbis.todo.services.TaskService;
 import si.feri.ris.kirbis.todo.services.TasklistService;
 import si.feri.ris.kirbis.todo.controllers.TaskController;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +37,9 @@ class TaskControllerTest {
     @Mock
     private TasklistService tasklistService;
 
+    @Mock
+    private TaskRepository taskRepository;
+
     private TaskController taskController;
     private Task testTask;
     private Tag testTag;
@@ -38,7 +47,7 @@ class TaskControllerTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        taskController = new TaskController(taskService, tasklistService, taskService, null);
+        taskController = new TaskController(taskService, tasklistService, taskService, taskRepository);
         
         // Initialize test data
         testTag = new Tag();
@@ -50,6 +59,7 @@ class TaskControllerTest {
         testTask.setDone(false);
         testTask.setTasklistId(1);
         testTask.setTag(testTag);
+        testTask.setFile_path("/uploads/test.txt");
     }
 
     @Nested
@@ -187,6 +197,80 @@ class TaskControllerTest {
             assertTrue(response.getBody().isDone(), 
                 "Task should be marked as done");
             verify(taskService, times(1)).update(testTask.getTask_id(), updatedTask);
+        }
+    }
+
+    @Nested
+    @DisplayName("File Management Tests")
+    class FileManagementTests {
+
+        @Test
+        @DisplayName("Should upload file successfully")
+        void uploadFile_Success() throws IOException {
+            // Arrange
+            String fileName = "test.txt";
+            String filePath = System.getProperty("user.dir") + "/uploads/" + fileName;
+            MockMultipartFile mockFile = new MockMultipartFile(
+                    "file", fileName, "text/plain", "File content".getBytes()
+            );
+
+            Task mockTask = new Task();
+            mockTask.setTask_id(testTask.getTask_id());
+            mockTask.setFile_path(null);
+
+            when(taskService.fileUpload(eq(testTask.getTask_id()), any())).thenAnswer(invocation -> {
+                Path uploadPath = Paths.get(filePath);
+                Files.createDirectories(uploadPath.getParent());
+                Files.write(uploadPath, mockFile.getBytes());
+                mockTask.setFile_path("/uploads/" + fileName);
+                return mockTask.getFile_path();
+            });
+
+            ResponseEntity<String> response = taskController.uploadFile(testTask.getTask_id(), mockFile);
+
+            assertEquals(HttpStatus.OK, response.getStatusCode(), "Response should have 200 OK status");
+            assertTrue(response.getBody().contains("File uploaded successfully"), "Response body should confirm upload");
+            assertTrue(Files.exists(Paths.get(filePath)), "Uploaded file should exist");
+            verify(taskService, times(1)).fileUpload(eq(testTask.getTask_id()), any());
+
+            Files.deleteIfExists(Paths.get(filePath));
+        }
+
+        @Test
+        @DisplayName("Should return 400 when uploading empty file")
+        void uploadFile_EmptyFile() {
+            MockMultipartFile emptyFile = new MockMultipartFile(
+                    "file", "empty.txt", "text/plain", new byte[0]
+            );
+
+            ResponseEntity<String> response = taskController.uploadFile(testTask.getTask_id(), emptyFile);
+
+            assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode(), "Response should have 400 Bad Request status");
+            assertEquals("No file selected.", response.getBody(), "Response body should indicate no file selected");
+        }
+
+        @Test
+        @DisplayName("Should download file successfully")
+        void downloadFile_Success() throws IOException {
+            String fileName = "test.txt";
+            String relativeFilePath = "/uploads/" + fileName;
+            String absoluteFilePath = System.getProperty("user.dir") + relativeFilePath;
+
+            Files.createDirectories(Paths.get(absoluteFilePath).getParent());
+            Files.write(Paths.get(absoluteFilePath), "File content".getBytes());
+
+            testTask.setFile_path(relativeFilePath);
+            when(taskService.getById(testTask.getTask_id())).thenReturn(Optional.of(testTask));
+
+            ResponseEntity<?> response = taskController.getFile(testTask.getTask_id());
+
+            assertEquals(HttpStatus.OK, response.getStatusCode(), "Response should have 200 OK status");
+            assertTrue(response.getHeaders().get("Content-Disposition").get(0).contains(fileName),
+                    "Response headers should contain correct file name");
+            assertNotNull(response.getBody(), "Response body should not be null");
+            verify(taskService, times(1)).getById(testTask.getTask_id());
+
+            Files.deleteIfExists(Paths.get(absoluteFilePath));
         }
     }
 }

@@ -75,21 +75,23 @@ The board is updated regularly to reflect the current state of tasks.
 
 ### Testing
 1. **Backend Tests:**
+    - Written Unit tests for validating the file upload and download options.
 
 2. **Frontend Testing:** 
+    - Manual tests were conducted to ensure functionality and a seamless user experience.
 
 ---
 
 ## Progress Summary
 ### Current Status:
-| Task                              | Status      |
-|-----------------------------------|-------------|
-| Adjust Data Model (Backend)       | Done        |
-| Implement REST API (Backend)      | Done        |
-| Add File Upload (Frontend)        | Done        |
-| Display Attachments (Frontend)    | Done        |
-| Connect Frontend and Backend      | Done        |
-| Testing and QA                    | In Progress |
+| Task                              | Status |
+|-----------------------------------|--------|
+| Adjust Data Model (Backend)       | Done   |
+| Implement REST API (Backend)      | Done   |
+| Add File Upload (Frontend)        | Done   |
+| Display Attachments (Frontend)    | Done   |
+| Connect Frontend and Backend      | Done   |
+| Testing and QA                    | Done   |
 
 
 
