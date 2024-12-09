@@ -14,8 +14,6 @@ export const DetailsMenu = forwardRef<HTMLDialogElement, DetailsMenuProps>(
       }
     };
 
-    const hasFile = true;
-
     const handleDownload = () => {
 
     }
@@ -33,13 +31,16 @@ export const DetailsMenu = forwardRef<HTMLDialogElement, DetailsMenuProps>(
                 className="text-gray-500 hover:text-gray-800 focus:outline-none"
                 onClick={closeModal}
                 aria-label="Close"
+                className="text-gray-500 hover:text-gray-800 focus:outline-none"
+                onClick={closeModal}
+                aria-label="Close"
             >
               ✕
             </button>
           </div>
 
           <div className="mb-6">
-            {hasFile ? (
+            {task.has_file ? (
                 <p className="text-gray-600 text-center mb-4">
                   Attach files to your task and keep all your essential information organized in one place.
                 </p>
@@ -52,16 +53,26 @@ export const DetailsMenu = forwardRef<HTMLDialogElement, DetailsMenuProps>(
           <div className="flex justify-center">
             <button
                 className="btn bg-purple-500 text-white hover:bg-purple-600 transition rounded-md px-4 py-2 mt-2 mb-5"
-                onClick={hasFile ? (handleDownload) : handleAddAttachment}
+                onClick={task.has_file ? (handleDownload) : handleAddAttachment}
             >
-              {hasFile ? "Download Attachment" : "Add Attachment"}
+              {task.has_file ? "Download Attachment" : "Add Attachment"}
             </button>
           </div>
 
         <div className="flex justify-end border-t pt-4">
           <button
+        <div className="flex justify-end border-t pt-4">
+          <button
               className="btn bg-gray-300 text-gray-800 hover:bg-gray-400 transition rounded-md px-4 py-2"
               onClick={closeModal}
+          >
+            Close
+          </button>
+        </div>
+      </div>
+  </dialog>
+  )
+    ;
           >
             Close
           </button>
