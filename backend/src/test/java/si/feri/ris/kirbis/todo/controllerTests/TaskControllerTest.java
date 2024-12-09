@@ -38,7 +38,7 @@ class TaskControllerTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        taskController = new TaskController(taskService, tasklistService);
+        taskController = new TaskController(taskService, tasklistService, taskService, null);
         
         // Initialize test data
         testTag = new Tag();
