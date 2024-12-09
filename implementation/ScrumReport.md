@@ -63,8 +63,11 @@ The board is updated regularly to reflect the current state of tasks.
 
 ### Frontend
 1. **File Upload Functionality:**
-
+    - Added a button and a details modal to the task for managing file attachments.
+    - Implemented an upload button that is displayed when no file is attached to the task.
+   
 2. **Display Attachments:**
+    - Created a download button that appears when a file is attached to the task, enabling users to retrieve the file.
 
 ### Connection
 1. **Frontend Adjustments:**
