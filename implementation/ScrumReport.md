@@ -71,6 +71,7 @@ The board is updated regularly to reflect the current state of tasks.
 
 ### Connection
 1. **Frontend Adjustments:**
+    - Integrated event handlers to manage file upload and download operations seamlessly.
 
 ### Testing
 1. **Backend Tests:**
@@ -87,7 +88,7 @@ The board is updated regularly to reflect the current state of tasks.
 | Implement REST API (Backend)      | Done        |
 | Add File Upload (Frontend)        | Done        |
 | Display Attachments (Frontend)    | Done        |
-| Connect Frontend and Backend      | In Progress |
+| Connect Frontend and Backend      | Done        |
 | Testing and QA                    | In Progress |
 
 
