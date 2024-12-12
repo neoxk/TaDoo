@@ -61,9 +61,11 @@ CREATE TABLE task (
     task_list_id INT NOT NULL,
     CONSTRAINT task_task_list_FK
         FOREIGN KEY (task_list_id) REFERENCES task_list (task_list_id),
-    done		 INT,
-    file_path	 VARCHAR(255),
-    has_file	 INT
+    done         INT,
+    file_path    VARCHAR(255),
+    has_file     INT,
+    created      TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    finished     TIMESTAMP NULL
 );
 
 -- Task Tag table
