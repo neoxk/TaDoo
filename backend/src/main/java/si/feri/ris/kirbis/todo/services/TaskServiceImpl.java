@@ -24,6 +24,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Timestamp;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Optional;
@@ -50,6 +51,7 @@ public class TaskServiceImpl implements TaskService {
         if (optionalTask.isPresent()) {
             Task task = optionalTask.get();
             task.setDone(true);
+            task.setFinished(new Timestamp(System.currentTimeMillis()));
             repository.save(task);
         }
     }

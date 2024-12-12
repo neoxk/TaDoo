@@ -53,5 +53,10 @@ public class TasklistController {
     public int percentDone(@PathVariable int id) {
         return service.percentDone(id);
     }
+
+    @GetMapping("/{id}/time")
+    public String timeFinished(@PathVariable int id) {
+        return service.timeFinished(id).toString();
+    }
 }
 

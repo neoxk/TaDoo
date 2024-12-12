@@ -11,6 +11,7 @@ import si.feri.ris.kirbis.todo.repositories.BoardTaskListRepository;
 import si.feri.ris.kirbis.todo.repositories.TaskRepository;
 import si.feri.ris.kirbis.todo.repositories.TasklistRepository;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -88,8 +89,40 @@ public class TasklistServiceImpl implements TasklistService {
         }
 
         return (int) ((double) tasks.size() / taskRepository.findByTasklistId(id).size() * 100);
-
     }
+
+    @Override
+    public String timeFinished(int id) {
+        List<Task> tasks = taskRepository.findByTasklistId(id);
+        if (tasks.isEmpty()) {
+            return "0 hours 0 minutes";
+        }
+
+        long totalTime = 0;
+        int count = 0;
+
+        for (Task task : tasks) {
+            if (task.getCreated() != null && task.getFinished() != null) {
+                Duration duration = Duration.between(task.getCreated().toLocalDateTime(), task.getFinished().toLocalDateTime());
+                totalTime += duration.toMillis();
+                count++;
+                System.out.println(duration.toMillis());
+            }
+        }
+
+        if (count == 0) {
+            return "0 hours 0 minutes";
+        }
+
+        long averageTime = totalTime / count;
+
+        long hours = averageTime / 3600000;
+        long minutes = (averageTime % 3600000) / 60000;
+
+        return hours + " hours " + minutes + " minutes";
+    }
+
+
 
     @Override
     public Optional<Tasklist> getById(int id) {

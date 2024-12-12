@@ -3,6 +3,10 @@ package si.feri.ris.kirbis.todo.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.sql.Timestamp;
 
 @Data
 @Entity
@@ -23,4 +27,9 @@ public class Task {
 
     private String file_path;
     private boolean has_file;
+
+    @CreationTimestamp
+    private Timestamp created;
+
+    private Timestamp finished;
 }

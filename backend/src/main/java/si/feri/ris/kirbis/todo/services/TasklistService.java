@@ -3,6 +3,7 @@ package si.feri.ris.kirbis.todo.services;
 import si.feri.ris.kirbis.todo.entities.Task;
 import si.feri.ris.kirbis.todo.entities.Tasklist;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,5 +13,6 @@ public interface TasklistService {
     public void update(int id, Tasklist tasklist);
     public void delete(int id);
     public int percentDone(int id);
+    public String timeFinished(int id);
     Optional<Tasklist> getById(int id);
 }
