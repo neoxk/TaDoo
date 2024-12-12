@@ -11,7 +11,7 @@ import si.feri.ris.kirbis.todo.util.SimpleBody;
 
 import java.util.*;
 
-@CrossOrigin(origins = "http://localhost:5174")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(path= "/api/board")
 public class BoardController {

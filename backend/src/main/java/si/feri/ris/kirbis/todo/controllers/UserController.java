@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.*;
 import si.feri.ris.kirbis.todo.entities.User;
 import si.feri.ris.kirbis.todo.services.UserService;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(path= "/api/user")
-@CrossOrigin(origins = "http://localhost:5174")
 public class UserController {
 
     private UserService service;
