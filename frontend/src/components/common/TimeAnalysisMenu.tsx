@@ -1,4 +1,5 @@
 import { forwardRef } from "preact/compat";
+import { useState, useEffect } from "preact/hooks";
 import { Tasklist } from "../../models/Tasklist.ts";
 
 interface TimeAnalysisMenuProps {
@@ -8,11 +9,55 @@ interface TimeAnalysisMenuProps {
 export const TimeAnalysisMenu = forwardRef<HTMLDialogElement, TimeAnalysisMenuProps>(
     ({ tasklist }, ref) => {
 
+        const [averageTime, setAverageTime] = useState("Loading...");
+        const [donePercentage, setDonePercentage] = useState("Loading...");
+
         const closeModal = () => {
             if (ref && "current" in ref && ref.current) {
                 ref.current.close();
             }
         };
+
+        const fetchPercentage = async () => {
+            try {
+                const response = await fetch(`http://localhost:8080/api/tasklist/${tasklist._tasklist_id}/done`, {
+                    method: "GET",
+                });
+
+                if (!response.ok) {
+                    throw new Error("Failed to get percentage.");
+                }
+
+                const data = await response.text();
+                setDonePercentage(`${data}%`);
+            } catch (error) {
+                console.error("Error showing percentage:", error);
+                setDonePercentage("Error");
+            }
+        }
+
+        const fetchTime = async () => {
+            try {
+                const response = await fetch(`http://localhost:8080/api/tasklist/${tasklist._tasklist_id}/time`, {
+                    method: "GET",
+                });
+
+                if (!response.ok) {
+                    throw new Error("Failed to get percentage.");
+                }
+
+                const data = await response.text();
+                setAverageTime(data);
+            } catch (error) {
+                console.error("Error showing percentage:", error);
+                setAverageTime("Error");
+            }
+        }
+
+        useEffect(() => {
+            fetchPercentage();
+            fetchTime();
+        }, [tasklist]);
 
         return (
             <dialog ref={ref} className="modal modal-bottom sm:modal-middle">
@@ -34,22 +79,16 @@ export const TimeAnalysisMenu = forwardRef<HTMLDialogElement, TimeAnalysisMenuPr
                         </p>
                     </div>
                     <div className="">
-                        {/*<button
-                            className="btn bg-purple-500 text-white hover:bg-purple-600 transition rounded-md px-4 py-2 mt-2 mb-5"
-
-                        >
-                            Download Attachment
-                        </button>*/}
                         <p className="mb-4">
                             Average Time:
                             <span className="bg-purple-600 text-white py-1 px-2 mx-2 border rounded">
-                                5 hours 15 minutes
+                                {averageTime}
                             </span>
                         </p>
                         <p className="mb-4">
                             Percentage of Done Tasks:
                             <span className="bg-purple-600 text-white py-1 px-2 mx-2 border rounded">
-                                80%
+                                {donePercentage}
                             </span>
                         </p>
                     </div>
