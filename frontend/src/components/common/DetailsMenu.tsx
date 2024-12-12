@@ -65,6 +65,7 @@ export const DetailsMenu = forwardRef<HTMLDialogElement, DetailsMenuProps>(
                 }
 
                 setHasFile(1);
+                window.location.reload();
             } catch (error) {
                 console.error("Error uploading file:", error);
             }

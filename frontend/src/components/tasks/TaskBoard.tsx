@@ -1,14 +1,11 @@
-import { Task } from "../../models/Task.ts";
-import { Color, Icon } from "../../types/types.ts";
+import { Icon } from "../../types/types.ts";
 import { EditableText } from "../common/EditableText.tsx";
 import { TasksContainer } from "./TasksContainer.tsx";
 import { Board } from "../../models/Board.ts";
-import { StateUpdater, useEffect, useState } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 import { Button } from "../common/Button.tsx";
 import { TaskService } from "../../services/TaskService.ts";
 import { Tasklist } from "../../models/Tasklist.ts";
-import { BoardService } from "../../services/BoardService.ts";
-// import {Tasklist} from "../../models/Tasklist.ts";
 
 interface TaskBoardProps {
   board: Board;
@@ -75,6 +72,7 @@ export const TaskBoard = ({ board, handleBoardRename }: TaskBoardProps) => {
             title={taskList.name}
             tasks={taskList.tasks}
             tasklist_id={taskList._tasklist_id}
+            tasklist={taskList}
             onDelete={handleDeleteTaskList}
             handleTasklistChange={(newTasklist: Tasklist) =>
               handleTasklistChange(newTasklist)
