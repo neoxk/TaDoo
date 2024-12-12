@@ -81,6 +81,17 @@ public class TasklistServiceImpl implements TasklistService {
     }
 
     @Override
+    public int percentDone(int id) {
+        List<Task> tasks = taskRepository.findByTasklistIdAndDone(id, true);
+        if (tasks.isEmpty()) {
+            return 0;
+        }
+
+        return (int) ((double) tasks.size() / taskRepository.findByTasklistId(id).size() * 100);
+
+    }
+
+    @Override
     public Optional<Tasklist> getById(int id) {
         return repository.findById(id);
     }

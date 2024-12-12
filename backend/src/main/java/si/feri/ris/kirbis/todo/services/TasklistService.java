@@ -11,6 +11,6 @@ public interface TasklistService {
     public List<Tasklist> getAll(int boardId);
     public void update(int id, Tasklist tasklist);
     public void delete(int id);
-
+    public int percentDone(int id);
     Optional<Tasklist> getById(int id);
 }

@@ -48,5 +48,10 @@ public class TasklistController {
         service.delete(id);
         return SimpleBody.success();
     }
+
+    @GetMapping("/{id}/done")
+    public int percentDone(@PathVariable int id) {
+        return service.percentDone(id);
+    }
 }
 

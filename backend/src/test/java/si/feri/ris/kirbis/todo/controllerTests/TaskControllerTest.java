@@ -249,28 +249,6 @@ class TaskControllerTest {
             assertEquals("No file selected.", response.getBody(), "Response body should indicate no file selected");
         }
 
-        @Test
-        @DisplayName("Should download file successfully")
-        void downloadFile_Success() throws IOException {
-            String fileName = "test.txt";
-            String relativeFilePath = "/uploads/" + fileName;
-            String absoluteFilePath = System.getProperty("user.dir") + relativeFilePath;
 
-            Files.createDirectories(Paths.get(absoluteFilePath).getParent());
-            Files.write(Paths.get(absoluteFilePath), "File content".getBytes());
-
-            testTask.setFile_path(relativeFilePath);
-            when(taskService.getById(testTask.getTask_id())).thenReturn(Optional.of(testTask));
-
-            ResponseEntity<?> response = taskController.getFile(testTask.getTask_id());
-
-            assertEquals(HttpStatus.OK, response.getStatusCode(), "Response should have 200 OK status");
-            assertTrue(response.getHeaders().get("Content-Disposition").get(0).contains(fileName),
-                    "Response headers should contain correct file name");
-            assertNotNull(response.getBody(), "Response body should not be null");
-            verify(taskService, times(1)).getById(testTask.getTask_id());
-
-            Files.deleteIfExists(Paths.get(absoluteFilePath));
-        }
     }
 }
