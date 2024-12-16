@@ -74,6 +74,7 @@ class TaskControllerTest {
         void createTask_ValidTasklistId_ReturnsNewTask() {
             // Arrange
             int tasklistId = 1;
+            String dwm = "DLY";
             Task expectedTask = new Task();
             expectedTask.setName("New Task");
             expectedTask.setTasklistId(tasklistId);
@@ -82,12 +83,13 @@ class TaskControllerTest {
             doNothing().when(taskService).create(any(Task.class));
 
             // Act
-            Task result = taskController.create(tasklistId);
+            Task result = taskController.create(tasklistId, dwm);
 
             // Assert
             assertNotNull(result, "Created task should not be null");
             assertEquals("New Task", result.getName(), "Task should have default name 'New Task'");
             assertEquals(tasklistId, result.getTasklistId(), "Task should be associated with correct tasklist");
+            assertEquals(dwm, result.getDwm(), "Task should have correct dwm value");
             assertFalse(result.isDone(), "New task should not be marked as done");
             verify(taskService, times(1)).create(any(Task.class));
         }
