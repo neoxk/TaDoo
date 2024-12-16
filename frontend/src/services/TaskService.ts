@@ -47,8 +47,8 @@ export class TaskService extends Service {
     return response;
   }
 
-  public async createTask(tasklist_id: number, name: string): Promise<Task> {
-    const response = await super.newRequest('/task?tasklist_id=' + tasklist_id).post()
+  public async createTask(tasklist_id: number, name: string, dwm: string): Promise<Task> {
+    const response = await super.newRequest('/task?tasklist_id=' + tasklist_id + "&dwm=" + dwm).post()
     return Task.fromJson(response);
   }
 

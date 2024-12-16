@@ -65,8 +65,8 @@ CREATE TABLE task (
     file_path    VARCHAR(255),
     has_file     INT,
     created      TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    finished     TIMESTAMP NULL
-);
+    finished     TIMESTAMP NULL,
+    dwm VARCHAR(3) NOT NULL;
 
 -- Task Tag table
 CREATE TABLE task_tag (

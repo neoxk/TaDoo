@@ -38,10 +38,11 @@ public class TaskController {
     }
 
     @PostMapping("")
-    public Task create(@RequestParam int tasklist_id) {
+    public Task create(@RequestParam int tasklist_id, @RequestParam String dwm) {
         Task task = new Task();
         task.setName("New Task");
         task.setTasklistId(tasklist_id);
+        task.setDwm(dwm);
 
         service.create(task);
 

@@ -13,7 +13,8 @@ export enum Icon {
   trash = "trash",
   send = "send",
   add = "add",
-  details = "details"
+  details = "details",
+  calendar = "calendar"
 }
 
 export const colorValues = Object.values(Color);

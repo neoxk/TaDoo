@@ -3,7 +3,7 @@ import { Task } from "../../models/Task";
 import { EditableText } from "../common/EditableText";
 import { Button } from "../common/Button";
 import { Color, Icon } from "../../types/types";
-import { useState } from "preact/hooks";
+import { useEffect, useReducer, useState } from "preact/hooks";
 import { TaskService } from "../../services/TaskService";
 import { Tasklist } from "../../models/Tasklist";
 import { useRef } from "react";
@@ -27,8 +27,15 @@ export function TasksContainer({
   handleTasklistChange,
 }: TasksContainerProps) {
 
-  const [currTasks, setCurrTasks] = useState(tasks);
+  const [allTasks, setAllTasks] = useState(tasks)
+  const [currTasks, setCurrTasks] = useState<Task[]>([]);
   const service = new TaskService();
+
+  const [dwm, setDwm] = useState("ALL") 
+
+  useEffect(() => {
+    setCurrTasks(allTasks.filter(task => dwm == "ALL" || task.dwm === dwm))
+  }, [allTasks, dwm])
 
   const timeAnalysisMenuRef = useRef<HTMLDialogElement | null>(null);
 
@@ -39,8 +46,10 @@ export function TasksContainer({
   };
 
   const addTask = () => {
-    service.createTask(tasklist_id, "New Task").then((task) => {
-      setCurrTasks([...currTasks, task]);
+    service.createTask(tasklist_id, "New Task", dwm).then((task) => {
+      console.log(task)
+      setAllTasks([...allTasks, task])
+      return
     });
   };
 
@@ -52,8 +61,9 @@ export function TasksContainer({
     service.deleteTask(currTasks[index]._task_id).then(() => {
       const updatedTasks = [...currTasks];
       updatedTasks.splice(index, 1);
-      setCurrTasks(updatedTasks);
+      setAllTasks(updatedTasks);
     });
+
   };
 
   const handleTagColorChange = (
@@ -62,7 +72,7 @@ export function TasksContainer({
     newColor: Color
   ) => {
     // @ts-ignore
-    setCurrTasks((prevTasks) =>
+    setAllTasks((prevTasks) =>
       prevTasks.map((task, i) =>
         i === taskIndex
           ? {
@@ -78,13 +88,27 @@ export function TasksContainer({
 
   const handleTaskChange = (newTask: Task) => {
     service.updateTask(newTask).then((updatedTask) => {
-      setCurrTasks((prevTasks) =>
-        prevTasks.map((task) =>
-          task._task_id === updatedTask._task_id ? updatedTask : task
-        )
-      );
+      setAllTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task._task_id === updatedTask._task_id ? updatedTask : task
+      )
+    );
     });
   };
+
+  const handleDWMChange = () => {
+    setDwm(curr => {
+      if (curr === "ALL") {
+        return "DLY" }
+      else if (curr === "DLY") {
+        return "WLY"
+      } else if (curr === "WLY") {
+        return "MLY"
+      } else {
+        return "ALL"
+      }  
+  })
+  }
 
   return (
     <div className="w-full max-w-[600px] p-4">
@@ -102,6 +126,7 @@ export function TasksContainer({
         <div className="ml-auto flex space-x-2">
           <Button iconName={Icon.add} onClick={addTask} size="small" />
           <Button iconName={Icon.trash} onClick={deleteTaskList} size="small" />
+          <Button text={dwm} onClick={handleDWMChange} size="small"/>
           <Button iconName={Icon.details} onClick={handleTimeAnalysisClick} size="small" />
         </div>
       </div>

@@ -41,6 +41,7 @@ export const Button = ({
   if (iconName && iconName === "send") iconUrl = "/icon_send.svg";
   if (iconName && iconName === "add") iconUrl = "/icon_add.svg";
   if (iconName && iconName === "details") iconUrl = "/icon_details.svg";
+  if (iconName && iconName === "calendar") iconUrl = "/icon_calendar.svg";
 
   return (
     <button onClick={onClick} className={`${colorClasses} rounded`}>

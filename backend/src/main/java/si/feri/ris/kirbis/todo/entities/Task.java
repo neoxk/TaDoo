@@ -32,4 +32,7 @@ public class Task {
     private Timestamp created;
 
     private Timestamp finished;
+
+    private String dwm;
+
 }
