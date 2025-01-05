@@ -64,7 +64,7 @@ jobs:
         java-version: '20'
         cache: maven
 
-     - name: SQL SetUp
+    - name: SQL SetUp
       run: |
         sudo /etc/init.d/mysql start
         mysql -e 'CREATE DATABASE tadoo;' -uroot -proot
