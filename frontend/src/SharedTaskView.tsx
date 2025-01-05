@@ -11,7 +11,7 @@ export const SharedTaskView = () => {
 
   useEffect(() => {
     if (params.task_id) {
-      const task = taskService
+      taskService
         .getTaskById(parseInt(params.task_id))
         .then((task) => {
           setTask(task);

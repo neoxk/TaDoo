@@ -1,60 +1,28 @@
-import { Tag } from "../models/Tag";
-import { Task } from "../models/Task";
-import { Tasklist } from "../models/Tasklist";
-import { Color } from "../types/types";
-import { Service } from "./Service";
+import {Task} from "../models/Task";
+import {Tasklist} from "../models/Tasklist";
+import {Service} from "./Service";
 
 export class TaskService extends Service {
 
   public async getTasklists(board_id: number): Promise<Tasklist[]> {
-    const response = super.newRequest("/tasklist?board_id="+ board_id).get()
-    return response
-  //   const tasks1: Task[] = [
-  //     new Task(1, "Ocisti sobo", false, [{ name: "nujno", color: Color.red }]),
-  //     new Task(2, "Opravi domaco nalogo", false, [
-  //       { name: "easy", color: Color.green },
-  //     ]),
-  //   new Task(3, "Pojdi na sprehod", false, [
-  //     { name: "jutri", color: Color.yellow },
-  //   ]),
-  // ];
-
-  // const tasks2: Task[] = [
-  //   new Task(2, "Opravi domaco nalogo", false, [{ name: "easy", color: Color.green }]),
-  //   new Task(3, "Pojdi na trening", false, [{ name: "jutri", color: Color.blue }]),
-  // ];
-
-  // const tasks3: Task[] = [
-  //   new Task(4, "Naredi nalogo", false, [{ name: "nujno", color: Color.purple }]),
-  // ];
-
-  // const initialTasklists: Tasklist[] = [
-  //   new Tasklist(1, "Tasks1", tasks1),
-  //   new Tasklist(2, "Tasks2", tasks2),
-  //   new Tasklist(3, "Tasks3", tasks3),
-  // ];
-
+    return super.newRequest("/tasklist?board_id=" + board_id).get()
   }
 
-
   public async createTasklist(board_id: number): Promise<Tasklist> {
-    const response = super.newRequest("/tasklist?boardId=" + board_id).post()
-    return response
+    return super.newRequest("/tasklist?boardId=" + board_id).post()
   }
 
   public async deleteTasklist(tasklist_id: number): Promise<void> {
-    const response = super.newRequest("/tasklist/" + tasklist_id).delete()
-    return response;
+    return super.newRequest("/tasklist/" + tasklist_id).delete();
   }
 
-  public async createTask(tasklist_id: number, name: string, dwm: string): Promise<Task> {
+  public async createTask(tasklist_id: number, dwm: string): Promise<Task> {
     const response = await super.newRequest('/task?tasklist_id=' + tasklist_id + "&dwm=" + dwm).post()
     return Task.fromJson(response);
   }
 
   public async deleteTask(task_id: number): Promise<void> {
-    const response = await super.newRequest("/task/" + task_id).delete()
-    return response;
+    return await super.newRequest("/task/" + task_id).delete();
   }
 
   public async updateTask(task: Task): Promise<Task> {
@@ -72,13 +40,11 @@ export class TaskService extends Service {
   }
 
   public async getQRCode(task_id: number): Promise<string> {
-    const response = await super.newRequest("/task/" + task_id + "/qr").get()
-    return response;
+    return await super.newRequest("/task/" + task_id + "/qr").get();
   }
 
   public async markAsDone(task_id: number): Promise<void> {
-    const response = await super.newRequest("/task/" + task_id + "/done").patch()
-    return response;
+    return await super.newRequest("/task/" + task_id + "/done").patch();
   }
 
 

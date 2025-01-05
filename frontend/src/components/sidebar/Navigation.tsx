@@ -1,8 +1,8 @@
 export interface NavigationProps {
-  linkTo: string;
+  // linkTo: string;
   text: string;
 }
 
-export const Navigation = ({ linkTo, text }: NavigationProps) => {
+export const Navigation = ({ text }: NavigationProps) => {
   return <p class="font-bold mt-6">{text}</p>;
 };

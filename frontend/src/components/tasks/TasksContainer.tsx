@@ -3,7 +3,7 @@ import { Task } from "../../models/Task";
 import { EditableText } from "../common/EditableText";
 import { Button } from "../common/Button";
 import { Color, Icon } from "../../types/types";
-import { useEffect, useReducer, useState } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 import { TaskService } from "../../services/TaskService";
 import { Tasklist } from "../../models/Tasklist";
 import { useRef } from "react";

@@ -1,10 +1,9 @@
 export class Request {
   private _url: string;
-  private token: string;
+  //private token: string;
 
-  constructor(url: string, token: string) {
+  constructor(url: string) {
     this._url = url;
-    this.token = token;
   }
 
   private request(method: string, data?: any): Promise<any> {

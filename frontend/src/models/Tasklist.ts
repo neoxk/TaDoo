@@ -1,4 +1,3 @@
-import { Board } from "./Board";
 import { Task } from "./Task";
 
 export class Tasklist {

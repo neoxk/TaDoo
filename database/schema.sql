@@ -1,6 +1,6 @@
 -- Database and table creation
-CREATE DATABASE IF NOT EXISTS tadoo;
-USE tadoo;
+-- CREATE DATABASE IF NOT EXISTS tadoo;
+-- USE tadoo;
 
 -- Drop tables in correct order to handle foreign key dependencies
 DROP TABLE IF EXISTS task_tag;
@@ -66,7 +66,8 @@ CREATE TABLE task (
     has_file     INT,
     created      TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     finished     TIMESTAMP NULL,
-    dwm VARCHAR(3) NOT NULL;
+    dwm VARCHAR(3) NOT NULL
+);
 
 -- Task Tag table
 CREATE TABLE task_tag (
@@ -79,4 +80,4 @@ CREATE TABLE task_tag (
         FOREIGN KEY (tag_id) REFERENCES tag (tag_id)
 );
 
-INSERT INTO user (full_name, username, email, password_hash) VALUES ('User', 'user', 'user@user', '123');
+INSERT INTO `user` (full_name, username, email, password_hash) VALUES ('User', 'user', 'user@user.com', '123');

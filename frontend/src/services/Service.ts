@@ -6,6 +6,6 @@ export class Service {
   public domain: string = BACKEND_URL;
 
   public newRequest(path: string) {
-    return new Request(this.domain + "/api" + path, this.token)
+    return new Request(this.domain + "/api" + path)
   }
 }
