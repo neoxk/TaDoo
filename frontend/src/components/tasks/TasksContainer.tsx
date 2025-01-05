@@ -46,7 +46,7 @@ export function TasksContainer({
   };
 
   const addTask = () => {
-    service.createTask(tasklist_id, "New Task", dwm).then((task) => {
+    service.createTask(tasklist_id, dwm).then((task) => {
       console.log(task)
       setAllTasks([...allTasks, task])
       return
