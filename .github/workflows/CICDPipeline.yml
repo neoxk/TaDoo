@@ -49,7 +49,7 @@ jobs:
       working-directory: frontend
 
   unit_test:
-    name: Build Unit Test
+    name: Build Unit Tests
     runs-on: ubuntu-latest
     needs: [build_backend]
 
