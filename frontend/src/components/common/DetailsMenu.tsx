@@ -2,6 +2,7 @@ import { forwardRef } from "preact/compat";
 import { Task } from "../../models/Task.ts";
 import { useRef } from "react";
 import { useState } from "preact/hooks";
+import {EditableText} from "./EditableText.tsx";
 
 interface DetailsMenuProps {
     task: Task;
@@ -88,7 +89,8 @@ export const DetailsMenu = forwardRef<HTMLDialogElement, DetailsMenuProps>(
                     <div className="mb-6">
                         {hasFile ? (
                             <p className="text-gray-600 text-center mb-4">
-                                Attach files to your task and keep all your essential information organized in one place.
+                                Attach files to your task and keep all your essential information organized in one
+                                place.
                             </p>
                         ) : (
                             <p className="text-gray-600 text-center mb-4">
@@ -113,6 +115,18 @@ export const DetailsMenu = forwardRef<HTMLDialogElement, DetailsMenuProps>(
                             </button>
                         )}
                     </div>
+                    <hr className="mb-3" />
+                    <div className="mb-5">
+                        <h3 className="text-lg text-gray-500">Task Description</h3>
+                        <div>
+                            <EditableText
+                                text="Feel free to modify this and include your own description."
+                                handleChange={(newText) =>
+                                    (console.log(newText))
+                                }
+                            />
+                        </div>
+                    </div>
 
                     <input
                         type="file"
@@ -122,7 +136,7 @@ export const DetailsMenu = forwardRef<HTMLDialogElement, DetailsMenuProps>(
                     />
 
                     <div className="flex justify-end border-t pt-4">
-                        <button
+                    <button
                             className="btn bg-gray-300 text-gray-800 hover:bg-gray-400 transition rounded-md px-4 py-2"
                             onClick={closeModal}
                         >
