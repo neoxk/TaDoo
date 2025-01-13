@@ -72,6 +72,27 @@ export const DetailsMenu = forwardRef<HTMLDialogElement, DetailsMenuProps>(
             }
         };
 
+        const handleChangeDescription = (newText: string) => {
+            //console.log(newText);
+        
+            fetch(`http://localhost:8080/api/task/${task._task_id}/description`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ newDescription: newText }),
+            })
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("Failed to update task description");
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error updating task description:", error);
+                });
+        };        
+        
+
         return (
             <dialog ref={ref} className="modal modal-bottom sm:modal-middle">
                 <div className="modal-box p-6 rounded-lg shadow-lg bg-white">
@@ -120,10 +141,8 @@ export const DetailsMenu = forwardRef<HTMLDialogElement, DetailsMenuProps>(
                         <h3 className="text-lg text-gray-500">Task Description</h3>
                         <div>
                             <EditableText
-                                text="Feel free to modify this and include your own description."
-                                handleChange={(newText) =>
-                                    (console.log(newText))
-                                }
+                                text={task.description || ""}
+                                handleChange={handleChangeDescription}
                             />
                         </div>
                     </div>

@@ -16,6 +16,7 @@ public class Task {
     private int task_id;
 
     private String name;
+    private String description;
     private boolean done;
 
     @Column(name = "task_list_id")

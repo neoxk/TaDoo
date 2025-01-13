@@ -82,6 +82,14 @@ public class TaskServiceImpl implements TaskService {
         }
     }
 
+    @Override
+    public void updateDescription(int id, String description) {
+        if (repository.existsById(id)) {
+            Task task = repository.findById(id).orElseThrow(() -> new RuntimeException("Task not found"));
+            task.setDescription(description);
+            repository.save(task);
+        }
+    }
 
 
     @Override

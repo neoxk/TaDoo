@@ -12,6 +12,7 @@ public interface TaskService {
     public void create(Task task);
     public void setDone(int id);
     public void update(int id, Task task);
+    public void updateDescription(int id, String description);
     public void delete(int id);
     public String share(int id);
     public ResponseEntity<byte[]> createQRCode(int id);

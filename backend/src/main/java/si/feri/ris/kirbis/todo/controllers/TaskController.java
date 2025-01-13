@@ -69,6 +69,17 @@ public class TaskController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @PutMapping("/{id}/description")
+    public ResponseEntity<Task> updateDescription(@PathVariable int id, @RequestBody Map<String, String> payload) {
+        String newDescription = payload.get("newDescription");
+
+        service.updateDescription(id, newDescription);
+
+        return service.getById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     @DeleteMapping(path = "{id}")
     public Map<String, String> delete(@PathVariable int id) {
         service.delete(id);
