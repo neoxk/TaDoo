@@ -58,6 +58,7 @@ CREATE TABLE tag (
 CREATE TABLE task (
     task_id      INT AUTO_INCREMENT PRIMARY KEY,
     name         VARCHAR(30) NOT NULL,
+    description  TEXT,
     task_list_id INT NOT NULL,
     CONSTRAINT task_task_list_FK
         FOREIGN KEY (task_list_id) REFERENCES task_list (task_list_id),
