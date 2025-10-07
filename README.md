@@ -99,8 +99,8 @@ Ensure you have the following installed:
 
 - **Java 17** or higher
 - **Maven** for building the backend
-- **Node.js** (version 14 or higher recommended) for the frontend
-- **Working Database**
+- **Node.js** (version 14 or higher recommended) + **npm** for the frontend
+- **Working MySQL Database** (To setup the database you can run `database/schema.sql`)
 
 ### Installation
 
@@ -113,6 +113,8 @@ Ensure you have the following installed:
 
 2. **Backend Setup**
 
+   - Edit `src/main/resources/application.properties` to point to your MySQL database
+  
    - Navigate to the backend directory:
 
     ```bash
@@ -125,7 +127,7 @@ Ensure you have the following installed:
       mvn clean install
     ```
 
-3. **Frontend Setup**
+2. **Frontend Setup**
 
    - Navigate to the frontend directory:
 
@@ -139,7 +141,7 @@ Ensure you have the following installed:
       npm install
     ```
 
-4. **Environment Variables**
+3. **Environment Variables**
 
    - Configure any necessary environment variables for both backend and frontend, such as database URL and server port settings in the `application.properties` file.
 
